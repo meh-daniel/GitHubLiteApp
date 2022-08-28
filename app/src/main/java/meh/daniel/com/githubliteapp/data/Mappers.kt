@@ -8,8 +8,7 @@ internal fun List<RepositoriesNW>.toDomain(): List<Repository> {
         Repository(
             name = it.name,
             language = it.language,
-            description = "desc"
-            //TODO: со стороны сервера приходят null- требует реализации
+            description = it.description
         )
     }
 }

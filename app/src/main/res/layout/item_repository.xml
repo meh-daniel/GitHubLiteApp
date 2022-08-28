@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/black"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -9,30 +10,43 @@
         android:id="@+id/nameRepositoryTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_marginStart="@dimen/margin16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="GitHubLiteApp"/>
+        tools:text="GitHubLiteApp"
+        style="@style/itemNameRepositoryTxt"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/programmingLanguageTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="9dp"
-        android:layout_marginEnd="18dp"
+        android:layout_marginTop="@dimen/margin8"
+        android:layout_marginEnd="@dimen/margin16"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="kotlin"/>
+        tools:text="kotlin"
+        style="@style/itemNameLanguageTxt"/>
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/repositoryDescription"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        android:layout_marginStart="18dp"
+        android:layout_marginTop="@dimen/margin4"
+        android:layout_marginHorizontal="@dimen/margin16"
         app:layout_constraintTop_toBottomOf="@+id/nameRepositoryTxt"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="gjfsdlgijdsflghdsfhjgdsfajdlaksjfashdfkjasgfsljaaaaaaa"/>
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:text="eeeeeeeehhhhhhhoooooooooooyyyyyyyyyyyyyyy"
+        tools:visibility="visible"
+        style="@style/itemRepositoryDescriptionTxt"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="8dp"
+        android:background="@color/grey_500"
+        app:layout_constraintTop_toBottomOf="@+id/repositoryDescription"
+        app:layout_constraintStart_toStartOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

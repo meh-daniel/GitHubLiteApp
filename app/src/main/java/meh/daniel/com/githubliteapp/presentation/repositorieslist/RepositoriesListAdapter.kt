@@ -1,6 +1,8 @@
 package meh.daniel.com.githubliteapp.presentation.repositorieslist
 
+import android.opengl.Visibility
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -30,7 +32,10 @@ class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : Recycle
     fun bind(item: Repository){
         binding.nameRepositoryTxt.text = item.name
         binding.programmingLanguageTxt.text = item.language
-        binding.repositoryDescription.text = item.description
+        if(item.description != null){
+            binding.repositoryDescription.visibility = View.VISIBLE
+            binding.repositoryDescription.text = item.description
+        }
     }
 
     companion object {
