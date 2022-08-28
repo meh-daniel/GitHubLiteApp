@@ -1,5 +1,8 @@
 package meh.daniel.com.githubliteapp.presentation.repositoryinfo
 
-class RepositoryInfoFragment {
+import androidx.fragment.app.Fragment
+import meh.daniel.com.githubliteapp.R
+
+class RepositoryInfoFragment : Fragment(R.layout.fragment_repositoryinfo){
     //TODO: Сделать фрагмент с информацией по репозиторию
 }
