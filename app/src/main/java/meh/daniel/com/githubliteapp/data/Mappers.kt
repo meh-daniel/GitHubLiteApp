@@ -6,7 +6,9 @@ import meh.daniel.com.githubliteapp.domain.model.Repository
 internal fun List<RepositoriesNW>.toDomain(): List<Repository> {
     return map {
         Repository(
-            name = it.name
+            name = it.name,
+            language = it.language,
+            description = it.description.toString()
         )
     }
 }
