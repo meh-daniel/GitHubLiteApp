@@ -1,16 +1,38 @@
 package meh.daniel.com.githubliteapp.presentation.repositorieslist
 
+import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import meh.daniel.com.githubliteapp.domain.AppRepository
 import meh.daniel.com.githubliteapp.domain.model.Repository
 
-class RepositoriesListViewModel {
+@HiltViewModel
+class RepositoriesListViewModel @Inject constructor(
+    private val repository: AppRepository
+) : ViewModel() {
 
-//    val state: LiveData<State>
+    private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
+    var repositories: LiveData<List<Repository>> = _repositories
 
-    sealed interface State {
-        object Loading : State
-        data class Loaded(val repositories: List<Repository>) : State
-        data class Error(val error: String) : State
-        object Empty : State
+    init {
+        loadRepositories()
+    }
+
+    private fun loadRepositories() {
+        viewModelScope.launch(Dispatchers.IO) {
+            try {
+                val repositories = repository.getRepositoriesByName("meh-daniel")
+                _repositories.postValue(repositories)
+            } catch (e : Throwable) {
+                Log.e("xxx", "error Load")
+            }
+        }
     }
 
 }
