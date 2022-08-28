@@ -19,6 +19,11 @@ class RepositoryAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(Repos
         is RepositoryViewHolder -> holder.bind(item = getItem(position))
         else -> throw Throwable("onBindViewHolder exception - unknown holder of view by name ${holder.itemView.id}")
     }
+
+    override fun getItemViewType(position: Int): Int = when(getItem(position)){
+        is Repository -> R.layout.item_repository
+        else -> throw Exception("getItemViewType unknown item class exception")
+    }
 }
 
 class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : RecyclerView.ViewHolder(binding.root){
