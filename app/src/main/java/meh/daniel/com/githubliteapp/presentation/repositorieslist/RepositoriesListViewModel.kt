@@ -27,7 +27,7 @@ class RepositoriesListViewModel @Inject constructor(
     private fun loadRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                val repositories = repository.getRepositoriesByName("meh-daniel")
+                val repositories = repository.getRepositoriesByNameUser("meh-daniel")
                 _repositories.postValue(repositories)
             } catch (e : Throwable) {
                 Log.e("xxx", "error Load")

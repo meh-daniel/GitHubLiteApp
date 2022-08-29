@@ -1,3 +1,5 @@
 package meh.daniel.com.githubliteapp.domain.model
 
-data class RepositoryDetails(val details: String)
+data class RepositoryDetails(
+    val nameRepo: String
+    )
