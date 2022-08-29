@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.data.nw
+package meh.daniel.com.githubliteapp.data.nw.modelNW
 
 
 import com.google.gson.annotations.SerializedName
