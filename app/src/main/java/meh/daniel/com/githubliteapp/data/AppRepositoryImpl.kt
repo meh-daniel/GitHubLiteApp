@@ -1,11 +1,9 @@
 package meh.daniel.com.githubliteapp.data
 
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
-import meh.daniel.com.githubliteapp.data.nw.modelNW.RepositoryReadmeNW
 import meh.daniel.com.githubliteapp.domain.AppRepository
-import meh.daniel.com.githubliteapp.domain.model.Repository
-import meh.daniel.com.githubliteapp.domain.model.RepositoryDetails
-import meh.daniel.com.githubliteapp.domain.model.UserInfo
+import meh.daniel.com.githubliteapp.domain.model.repository.Repository
+import meh.daniel.com.githubliteapp.domain.model.repository.RepositoryDetails
 
 class AppRepositoryImpl(
     private val gitHubApi: GitHubApi
@@ -32,9 +30,5 @@ class AppRepositoryImpl(
             repositoryName = repositoryName,
             branchName = branchName
         ).toDomain()
-    }
-
-    override suspend fun signIn(token: String): UserInfo {
-        return gitHubApi.getUserByToken(token).toDomain()
     }
 }
