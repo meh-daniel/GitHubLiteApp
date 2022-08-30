@@ -17,6 +17,7 @@ import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.Event
+import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.*
 
 @AndroidEntryPoint
 class AuthFragment : Fragment(R.layout.fragment_auth){
@@ -35,13 +36,24 @@ class AuthFragment : Fragment(R.layout.fragment_auth){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        eventFlowLifecycle()
         initButtonSignIn()
+        lifecycleScope.launch(Dispatchers.Main) {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.actionFlow.collect() { action ->
+                    when(action) {
+                        is RouteToMain -> {
+                            findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
+                        }
+                        is ShowError -> eventFlowLifecycle()
+                    }
+                }
+            }
+        }
     }
 
     private fun initButtonSignIn() {
         binding.signInBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
+            viewModel.onSignButtonPressed(binding.tokenEdTxt.text.toString())
         }
     }
 
