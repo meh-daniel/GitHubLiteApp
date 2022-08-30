@@ -31,7 +31,7 @@
         style="@style/titleOfEditText"/>
 
     <com.google.android.material.textfield.TextInputEditText
-        android:id="@+id/userNameEditText"
+        android:id="@+id/tokenEdTxt"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/margin16"
@@ -42,7 +42,7 @@
 
 
     <com.google.android.material.button.MaterialButton
-        android:id="@+id/searchUserBtn"
+        android:id="@+id/signInBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="@string/sign_in"
