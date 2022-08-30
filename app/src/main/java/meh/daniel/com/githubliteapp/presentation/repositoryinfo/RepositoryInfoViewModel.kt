@@ -1,6 +1,6 @@
 package meh.daniel.com.githubliteapp.presentation.repositoryinfo
 
-import meh.daniel.com.githubliteapp.domain.model.Repository
+import meh.daniel.com.githubliteapp.domain.model.repository.Repository
 
 class RepositoryInfoViewModel {
 //    val state: LiveData<State>

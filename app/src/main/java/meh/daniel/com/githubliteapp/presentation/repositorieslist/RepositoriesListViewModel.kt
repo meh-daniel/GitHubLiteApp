@@ -10,7 +10,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.domain.AppRepository
-import meh.daniel.com.githubliteapp.domain.model.Repository
+import meh.daniel.com.githubliteapp.domain.model.repository.Repository
 
 @HiltViewModel
 class RepositoriesListViewModel @Inject constructor(
