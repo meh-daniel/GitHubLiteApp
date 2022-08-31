@@ -2,13 +2,12 @@ package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.domain.AppRepository
+import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
 import meh.daniel.com.githubliteapp.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 

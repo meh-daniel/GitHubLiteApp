@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.domain
+package meh.daniel.com.githubliteapp.domain.repositories
 
 import meh.daniel.com.githubliteapp.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.domain.model.repository.RepositoryDetails

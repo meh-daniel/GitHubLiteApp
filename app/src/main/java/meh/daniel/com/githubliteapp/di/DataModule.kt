@@ -9,8 +9,8 @@ import javax.inject.Singleton
 import meh.daniel.com.githubliteapp.data.repositories.AppRepositoryImpl
 import meh.daniel.com.githubliteapp.data.repositories.SignRepositoryImpl
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
-import meh.daniel.com.githubliteapp.domain.AppRepository
-import meh.daniel.com.githubliteapp.domain.SignRepository
+import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
+import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
 
 @Module
 @InstallIn(SingletonComponent::class)

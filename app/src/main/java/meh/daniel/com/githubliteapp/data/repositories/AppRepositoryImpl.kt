@@ -2,7 +2,7 @@ package meh.daniel.com.githubliteapp.data.repositories
 
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
 import meh.daniel.com.githubliteapp.data.toDomain
-import meh.daniel.com.githubliteapp.domain.AppRepository
+import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
 import meh.daniel.com.githubliteapp.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.domain.model.repository.RepositoryDetails
 

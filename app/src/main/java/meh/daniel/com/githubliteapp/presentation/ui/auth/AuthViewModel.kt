@@ -9,7 +9,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.domain.SignRepository
+import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.ui.Event
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 

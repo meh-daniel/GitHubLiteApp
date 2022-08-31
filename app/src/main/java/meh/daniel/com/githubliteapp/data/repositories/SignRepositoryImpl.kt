@@ -2,7 +2,7 @@ package meh.daniel.com.githubliteapp.data.repositories
 
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
 import meh.daniel.com.githubliteapp.data.toDomain
-import meh.daniel.com.githubliteapp.domain.SignRepository
+import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.domain.model.token.ValidationResult
 
 class SignRepositoryImpl(
