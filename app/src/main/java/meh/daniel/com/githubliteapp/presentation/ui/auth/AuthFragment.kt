@@ -16,8 +16,6 @@ import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
 import meh.daniel.com.githubliteapp.presentation.ui.Event
-import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.RouteToMain
-import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.ShowError
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth){
@@ -29,31 +27,29 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         container: ViewGroup?
     ) = FragmentAuthBinding.inflate(inflater, container, false)
 
-    override fun initialize() {
-        super.initialize()
-        eventFlowLifecycle()
-        actionFlowLifecycle()
-    }
-
     override fun setupListeners() {
         super.setupListeners()
         initButtonSignIn()
     }
 
-    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
-    private fun actionFlowLifecycle() {
-        lifecycleScope.launch(Dispatchers.Main) {
-            repeatOnLifecycle(Lifecycle.State.STARTED) {
-                viewModel.actionFlow.collect() { action ->
-                    when (action) {
-                        is RouteToMain -> {
-                            findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
-                        }
-                        is ShowError -> viewModel.sendEvent(Event.ShowSnackbar(action.message))
-                    }
-                }
+    override fun setupSubscribers() {
+        super.setupSubscribers()
+        eventFlowLifecycle()
+        subscribeToAction()
+    }
+
+    private fun subscribeToAction() {
+        viewModel.validationState.collectUIState(
+            state = {
+
+            },
+            onError = {
+                viewModel.sendEvent(Event.ShowSnackbar("AAAAA"))
+            },
+            onSuccess = {
+                findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
             }
-        }
+        )
     }
 
     private fun initButtonSignIn() {

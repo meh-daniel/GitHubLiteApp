@@ -7,11 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
+import meh.daniel.com.githubliteapp.domain.model.token.ValidationResult
 import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
-import meh.daniel.com.githubliteapp.presentation.ui.Event
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
+import meh.daniel.com.githubliteapp.presentation.ui.Event
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
@@ -27,7 +29,8 @@ class AuthViewModel @Inject constructor(
     private val _actionChannel = Channel<AuthAction>()
     var actionFlow = _actionChannel.receiveAsFlow()
 
-    //    val state: LiveData<State>
+    private val _validationState = MutableUIStateFlow<ValidationResult>()
+    val validationState = _validationState.asStateFlow()
 
     fun onSignButtonPressed(token: String) {
         viewModelScope.launch(Dispatchers.IO){
