@@ -1,10 +1,8 @@
 package meh.daniel.com.githubliteapp.presentation.auth
 
-import android.os.Bundle
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
@@ -16,47 +14,51 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
+import meh.daniel.com.githubliteapp.presentation.BaseFragment
 import meh.daniel.com.githubliteapp.presentation.Event
-import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.*
+import meh.daniel.com.githubliteapp.presentation.activityNavController
+import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.RouteToMain
+import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.ShowError
+import meh.daniel.com.githubliteapp.presentation.navigateSafely
 
 @AndroidEntryPoint
-class AuthFragment : Fragment(R.layout.fragment_auth){
+class AuthFragment : BaseFragment<FragmentAuthBinding>(R.layout.fragment_auth, R.id.authFragment){
 
-    private lateinit var binding: FragmentAuthBinding
     private val viewModel: AuthViewModel by viewModels()
 
-    override fun onCreateView(
+    override fun initBinding(
         inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentAuthBinding.inflate(inflater, container, false)
-        return binding.root
-    }
+        container: ViewGroup?
+    ) = FragmentAuthBinding.inflate(inflater, container, false)
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initButtonSignIn()
+//    initView()
+//    eventFlowLifecycle()
+//    actionFlowLifecycle()
+
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
+    private fun actionFlowLifecycle() {
         lifecycleScope.launch(Dispatchers.Main) {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
+            repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.actionFlow.collect() { action ->
-                    when(action) {
+                    when (action) {
                         is RouteToMain -> {
-                            findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
+                            activityNavController().navigateSafely(R.id.action_authFragment_to_repositoriesListFragment)
                         }
-                        is ShowError -> eventFlowLifecycle()
+                        is ShowError -> viewModel.sendEvent(Event.ShowSnackbar(action.message))
                     }
                 }
             }
         }
     }
 
-    private fun initButtonSignIn() {
+    private fun initView() {
         binding.signInBtn.setOnClickListener {
             viewModel.onSignButtonPressed(binding.tokenEdTxt.text.toString())
         }
+
     }
 
+    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun eventFlowLifecycle(){
         lifecycleScope.launch(Dispatchers.Main) {
             repeatOnLifecycle(Lifecycle.State.CREATED) {
@@ -70,5 +72,4 @@ class AuthFragment : Fragment(R.layout.fragment_auth){
             }
         }
     }
-
 }

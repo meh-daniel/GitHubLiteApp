@@ -40,16 +40,28 @@
         app:layout_constraintEnd_toEndOf="parent"
         style="@style/editText"/>
 
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/signInBtn"
-        android:layout_width="match_parent"
+    <RelativeLayout
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_in"
-        android:layout_margin="@dimen/margin16"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        style="@style/buttonSignIn"/>
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/sign_in"
+            android:layout_margin="@dimen/margin16"
+            android:elevation="0dp"
+            style="@style/buttonSignIn"/>
+
+        <ProgressBar
+            android:id="@+id/progressBarOfButton"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_centerInParent="true"
+            android:elevation="10dp"
+            android:visibility="invisible" />
+    </RelativeLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

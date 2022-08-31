@@ -1,39 +1,28 @@
 package meh.daniel.com.githubliteapp.presentation.repositorieslist
 
 import android.annotation.SuppressLint
-import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentRepositorieslistBinding
+import meh.daniel.com.githubliteapp.presentation.BaseFragment
 
 @AndroidEntryPoint
-class RepositoriesListFragment : Fragment(R.layout.fragment_repositorieslist){
+class RepositoriesListFragment : BaseFragment<FragmentRepositorieslistBinding>(R.layout.fragment_repositorieslist, R.id.repositoriesListFragment){
 
-    private lateinit var binding: FragmentRepositorieslistBinding
+    override fun initBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ) = FragmentRepositorieslistBinding.inflate(inflater, container, false)
+
+
     private val viewModel: RepositoriesListViewModel by viewModels()
-
     private val repositoryAdapter = RepositoryAdapter()
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentRepositorieslistBinding.inflate(inflater, container, false)
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        initRecyclerView()
-        observableViewModel()
-    }
+   // observableViewModel()
 
     @SuppressLint("FragmentLiveDataObserve")
     private fun observableViewModel() {
