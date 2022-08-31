@@ -2,12 +2,12 @@ package meh.daniel.com.githubliteapp.data.repositories
 
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
 import meh.daniel.com.githubliteapp.data.toDomain
-import meh.daniel.com.githubliteapp.domain.TokenRepository
+import meh.daniel.com.githubliteapp.domain.SignRepository
 import meh.daniel.com.githubliteapp.domain.model.token.ValidationResult
 
-class TokenRepositoryImpl(
+class SignRepositoryImpl(
     private val gitHubApi: GitHubApi
-) : TokenRepository {
+) : SignRepository {
     override suspend fun signIn(token: String): ValidationResult {
         return try {
             if(token.isBlank()){

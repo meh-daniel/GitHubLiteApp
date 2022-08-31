@@ -9,13 +9,13 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.domain.TokenRepository
+import meh.daniel.com.githubliteapp.domain.SignRepository
 import meh.daniel.com.githubliteapp.presentation.ui.Event
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val tokenRepository: TokenRepository
+    private val signRepository: SignRepository
 ) : BaseViewModel(){
 
     private val _token: MutableLiveData<String> = MutableLiveData()
@@ -31,7 +31,7 @@ class AuthViewModel @Inject constructor(
 
     fun onSignButtonPressed(token: String) {
         viewModelScope.launch(Dispatchers.IO){
-            val repo = tokenRepository.signIn(token = "Token $token")
+            val repo = signRepository.signIn(token = "Token $token")
             if (!repo.successful){
                 sendEvent(Event.ShowSnackbar(repo.errorMessage!!))
                 sendAction(AuthAction.ShowError(repo.errorMessage))

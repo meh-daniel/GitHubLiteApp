@@ -7,10 +7,10 @@ import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
 import meh.daniel.com.githubliteapp.data.repositories.AppRepositoryImpl
-import meh.daniel.com.githubliteapp.data.repositories.TokenRepositoryImpl
+import meh.daniel.com.githubliteapp.data.repositories.SignRepositoryImpl
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
 import meh.daniel.com.githubliteapp.domain.AppRepository
-import meh.daniel.com.githubliteapp.domain.TokenRepository
+import meh.daniel.com.githubliteapp.domain.SignRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -26,7 +26,7 @@ class DataModule {
     @Singleton
     fun provideTokenRepository(
         @Named("GitHubApi") gitHubApi: GitHubApi
-    ) : TokenRepository {
-        return TokenRepositoryImpl(gitHubApi)
+    ) : SignRepository {
+        return SignRepositoryImpl(gitHubApi)
     }
 }
