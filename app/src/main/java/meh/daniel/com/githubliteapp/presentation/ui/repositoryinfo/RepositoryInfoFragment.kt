@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.repositoryinfo
+package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
 
 import androidx.fragment.app.Fragment
 import meh.daniel.com.githubliteapp.R

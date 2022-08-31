@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.auth
+package meh.daniel.com.githubliteapp.presentation.ui.auth
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -7,7 +7,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
@@ -17,8 +16,8 @@ import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.BaseFragment
 import meh.daniel.com.githubliteapp.presentation.Event
 import meh.daniel.com.githubliteapp.presentation.activityNavController
-import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.RouteToMain
-import meh.daniel.com.githubliteapp.presentation.auth.AuthAction.ShowError
+import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.RouteToMain
+import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.ShowError
 import meh.daniel.com.githubliteapp.presentation.navigateSafely
 
 @AndroidEntryPoint

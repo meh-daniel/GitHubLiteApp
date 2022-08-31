@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater

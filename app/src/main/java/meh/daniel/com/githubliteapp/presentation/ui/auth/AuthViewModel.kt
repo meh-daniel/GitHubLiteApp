@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.auth
+package meh.daniel.com.githubliteapp.presentation.ui.auth
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

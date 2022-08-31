@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.auth
+package meh.daniel.com.githubliteapp.presentation.ui.auth
 
 sealed class AuthState {
     object Idle : AuthState()

@@ -1,6 +1,5 @@
-package meh.daniel.com.githubliteapp.presentation.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
