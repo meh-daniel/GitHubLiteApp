@@ -69,6 +69,7 @@ dependencies {
     // Lifecycle
     implementation(Dependencies.Lifecycle.viewmodel)
     implementation(Dependencies.Lifecycle.livedata)
+    implementation(Dependencies.Lifecycle.runtime)
 
     // Navigation
     implementation(Dependencies.Navigation.fragment)
@@ -95,6 +96,7 @@ dependencies {
     // UI
     implementation(Dependencies.UI.constraintLayout)
     implementation(Dependencies.UI.recyclerView)
+    implementation(Dependencies.UI.progressbar)
     implementation(Dependencies.UI.fragmentKtx)
     implementation(Dependencies.UI.activityKtx)
 

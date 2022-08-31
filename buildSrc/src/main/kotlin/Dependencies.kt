@@ -13,6 +13,7 @@ object Dependencies {
     // UI
     private const val versionConstraintLayout = "2.1.4"
     private const val versionRecyclerView = "1.2.1"
+    private const val versionProgressbar = "3.1.0"
     private const val fragmentKtxVersion = "1.5.0"
     private const val activityKtxVersion = "1.5.0"
     // Android
@@ -39,6 +40,7 @@ object Dependencies {
     object Lifecycle {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versionLifecycle"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versionLifecycle"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$versionLifecycle"
     }
 
     object Room {
@@ -71,6 +73,7 @@ object Dependencies {
     object UI {
         const val constraintLayout = "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
         const val recyclerView = "androidx.recyclerview:recyclerview:$versionRecyclerView"
+        const val progressbar = "com.mikhaellopez:circularprogressbar:$versionProgressbar"
         const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
         const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
     }
