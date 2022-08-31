@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui
+package meh.daniel.com.githubliteapp.presentation.ui.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -15,11 +15,9 @@ import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
-import meh.daniel.com.githubliteapp.presentation.Event
-import meh.daniel.com.githubliteapp.presentation.activityNavController
+import meh.daniel.com.githubliteapp.presentation.ui.Event
 import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.RouteToMain
 import meh.daniel.com.githubliteapp.presentation.ui.auth.AuthAction.ShowError
-import meh.daniel.com.githubliteapp.presentation.navigateSafely
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth){
