@@ -24,8 +24,8 @@ class AuthViewModel @Inject constructor(
     private val _eventChanel = Channel<Event>()
     var eventFlow = _eventChanel.receiveAsFlow()
 
-    private val _eventAction = Channel<AuthAction>()
-    var actionFlow = _eventAction.receiveAsFlow()
+    private val _actionChannel = Channel<AuthAction>()
+    var actionFlow = _actionChannel.receiveAsFlow()
 
     //    val state: LiveData<State>
 
@@ -40,14 +40,15 @@ class AuthViewModel @Inject constructor(
             }
         }
     }
-    private fun sendEvent(event: Event){
+
+    fun sendEvent(event: Event){
         viewModelScope.launch(Dispatchers.IO){
             _eventChanel.send(event)
         }
     }
     private fun sendAction(action: AuthAction){
         viewModelScope.launch(Dispatchers.IO){
-            _eventAction.send(action)
+            _actionChannel.send(action)
         }
     }
 }

@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
-import meh.daniel.com.githubliteapp.data.AppRepositoryImpl
-import meh.daniel.com.githubliteapp.data.TokenRepositoryImpl
+import meh.daniel.com.githubliteapp.data.repositories.AppRepositoryImpl
+import meh.daniel.com.githubliteapp.data.repositories.TokenRepositoryImpl
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
 import meh.daniel.com.githubliteapp.domain.AppRepository
 import meh.daniel.com.githubliteapp.domain.TokenRepository

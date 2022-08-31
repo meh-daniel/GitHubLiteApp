@@ -1,8 +1,8 @@
-package meh.daniel.com.githubliteapp.data
+package meh.daniel.com.githubliteapp.data.repositories
 
 import meh.daniel.com.githubliteapp.data.nw.GitHubApi
+import meh.daniel.com.githubliteapp.data.toDomain
 import meh.daniel.com.githubliteapp.domain.TokenRepository
-import meh.daniel.com.githubliteapp.domain.model.UserInfo
 import meh.daniel.com.githubliteapp.domain.model.token.ValidationResult
 
 class TokenRepositoryImpl(
