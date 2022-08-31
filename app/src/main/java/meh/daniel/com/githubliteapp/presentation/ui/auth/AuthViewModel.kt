@@ -12,11 +12,12 @@ import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.domain.TokenRepository
 import meh.daniel.com.githubliteapp.presentation.Event
+import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val tokenRepository: TokenRepository
-) : ViewModel(){
+) : BaseViewModel(){
 
     private val _token: MutableLiveData<String> = MutableLiveData()
     var token : LiveData<String> = _token

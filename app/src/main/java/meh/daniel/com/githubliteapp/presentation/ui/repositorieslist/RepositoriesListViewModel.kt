@@ -10,11 +10,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import meh.daniel.com.githubliteapp.domain.AppRepository
 import meh.daniel.com.githubliteapp.domain.model.repository.Repository
+import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
 class RepositoriesListViewModel @Inject constructor(
     private val repository: AppRepository
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
     var repositories: LiveData<List<Repository>> = _repositories
