@@ -23,7 +23,7 @@ class RepositoryAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(Repos
 
     override fun getItemViewType(position: Int): Int = when(getItem(position)){
         is Repository -> R.layout.item_repository
-        else -> throw Exception("getItemViewType unknown item class exception")
+        else -> throw Exception("getItemViewType unknown item class exception from position: $position")
     }
 }
 
