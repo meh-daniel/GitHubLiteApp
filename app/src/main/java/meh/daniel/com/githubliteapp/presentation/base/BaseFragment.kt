@@ -1,26 +1,23 @@
-package meh.daniel.com.githubliteapp.presentation
+package meh.daniel.com.githubliteapp.presentation.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.annotation.IdRes
 import androidx.annotation.LayoutRes
 import androidx.fragment.app.Fragment
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.viewbinding.ViewBinding
 
-abstract class BaseFragment<B : ViewBinding>(
-    @LayoutRes layoutId: Int,
-    @IdRes private val navHostFragmentId: Int
+abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(
+    @LayoutRes layoutId: Int
 ) : Fragment(layoutId){
 
-    private var _viewBinding: B ?= null
+    private var _viewBinding: Binding ?= null
 
     protected val binding get() = checkNotNull(_viewBinding)
+    protected abstract val viewModel: ViewModel
 
-    protected  abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?) : B
+    protected  abstract fun initBinding(inflater: LayoutInflater, container: ViewGroup?) : Binding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -33,7 +30,22 @@ abstract class BaseFragment<B : ViewBinding>(
 
     final override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initialize()
+        setupListeners()
+        setupRequests()
+        setupSubscribers()
+    }
 
+    protected open fun initialize() {
+    }
+
+    protected open fun setupListeners() {
+    }
+
+    protected open fun setupRequests() {
+    }
+
+    protected open fun setupSubscribers() {
     }
 
 
