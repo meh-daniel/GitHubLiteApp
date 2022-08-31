@@ -14,6 +14,7 @@ import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
 class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, FragmentRepositorieslistBinding>(R.layout.fragment_repositorieslist){
 
     override val viewModel: RepositoriesListViewModel by viewModels()
+
     private val repositoryAdapter = RepositoryAdapter()
 
     override fun initBinding(
