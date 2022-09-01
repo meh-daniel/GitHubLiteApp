@@ -1,15 +1,14 @@
 plugins {
-    id("com.android.application")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
+    id(Plugins.AGP.application)
+    id(Plugins.Hilt.plugin)
+    kotlin(Plugins.Kotlin.android)
+    kotlin(Plugins.Kotlin.kapt)
 }
 
 repositories {
     google()
     mavenCentral()
 }
-
 
 android {
     compileSdk = Config.compileSdk
@@ -18,9 +17,8 @@ android {
         applicationId = Config.packageName
         minSdk =  Config.minSDK
         targetSdk = Config.targetSDK
-        versionCode = Config.versionCode
-
-        versionName = Config.versionName
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -34,19 +32,19 @@ android {
             )
         }
     }
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Options.compileOptions
+        targetCompatibility = Options.compileOptions
     }
+
     kotlinOptions {
-        jvmTarget = "11"
+        jvmTarget = Options.kotlinOptions
 
         // без данного параметра viewModel не инициализировалась с помощью фабрики
         freeCompilerArgs = listOf("-Xjvm-default=compatibility")
     }
-    buildFeatures {
-        viewBinding = true
-    }
+
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas",)
@@ -54,14 +52,21 @@ android {
             arg("room.expandProjection", "true")
         }
     }
+
     packagingOptions {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+
+    buildFeatures.viewBinding = true
 }
 
 dependencies {
+
+    implementation(project(":data"))
+    implementation(project(":domain"))
+
     // Hilt
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)
@@ -75,23 +80,9 @@ dependencies {
     implementation(Dependencies.Navigation.fragment)
     implementation(Dependencies.Navigation.ui)
 
-    // Room
-    implementation(Dependencies.Room.ktx)
-    implementation(Dependencies.Room.runtime)
-    implementation(Dependencies.Room.paging)
-    kapt(Dependencies.Room.compiler)
-
-    // GeoLocation
-    implementation(Dependencies.Geo.playServices)
-
     // Coroutines
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)
-
-    // Network
-    implementation(Dependencies.Network.retrofit2)
-    implementation(Dependencies.Network.retrofit2Gson)
-    implementation(Dependencies.Network.logging)
 
     // UI
     implementation(Dependencies.UI.constraintLayout)
@@ -110,4 +101,6 @@ dependencies {
     testImplementation(Dependencies.Test.jUnit)
     androidTestImplementation(Dependencies.Test.androidJUnit)
     androidTestImplementation(Dependencies.Test.espresso)
+    androidTestImplementation(Dependencies.Test.mockitoCore)
+    androidTestImplementation(Dependencies.Test.mockitoKotlin)
 }

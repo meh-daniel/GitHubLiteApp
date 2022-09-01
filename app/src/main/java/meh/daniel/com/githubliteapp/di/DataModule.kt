@@ -6,11 +6,11 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
-import meh.daniel.com.githubliteapp.data.repositories.AppRepositoryImpl
-import meh.daniel.com.githubliteapp.data.repositories.SignRepositoryImpl
-import meh.daniel.com.githubliteapp.data.nw.GitHubApi
-import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
-import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
+import meh.daniel.com.data.repositories.AppRepositoryImpl
+import meh.daniel.com.data.repositories.SignRepositoryImpl
+import meh.daniel.com.data.nw.GitHubApi
+import meh.daniel.com.domain.repositories.AppRepository
+import meh.daniel.com.domain.repositories.SignRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -18,15 +18,15 @@ class DataModule {
     @Provides
     @Singleton
     fun provideAppRepository(
-        @Named("GitHubApi") gitHubApi: GitHubApi
+        @Named("GitHubApi") gitHubApi: meh.daniel.com.data.nw.GitHubApi
     ) : AppRepository {
-        return AppRepositoryImpl(gitHubApi)
+        return meh.daniel.com.data.repositories.AppRepositoryImpl(gitHubApi)
     }
     @Provides
     @Singleton
     fun provideTokenRepository(
-        @Named("GitHubApi") gitHubApi: GitHubApi
+        @Named("GitHubApi") gitHubApi: meh.daniel.com.data.nw.GitHubApi
     ) : SignRepository {
-        return SignRepositoryImpl(gitHubApi)
+        return meh.daniel.com.data.repositories.SignRepositoryImpl(gitHubApi)
     }
 }

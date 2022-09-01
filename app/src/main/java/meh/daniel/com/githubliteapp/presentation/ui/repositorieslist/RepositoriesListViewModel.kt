@@ -7,8 +7,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
-import meh.daniel.com.githubliteapp.domain.model.repository.Repository
+import meh.daniel.com.domain.repositories.AppRepository
+import meh.daniel.com.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel

@@ -9,7 +9,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
-import meh.daniel.com.githubliteapp.data.nw.GitHubApi
+import meh.daniel.com.data.nw.GitHubApi
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -67,8 +67,8 @@ class NetworkModule {
     @Named("GitHubApi")
     fun provideWeatherApi(
         @Named("retrofitGitHubApiBuilder") retrofit: Retrofit
-    ) : GitHubApi {
-        return retrofit.create(GitHubApi::class.java)
+    ) : meh.daniel.com.data.nw.GitHubApi {
+        return retrofit.create(meh.daniel.com.data.nw.GitHubApi::class.java)
     }
 
 }

@@ -25,10 +25,13 @@ object Dependencies {
     private const val versionRoomPagind = "2.4.0-alpha04"
     // GeoLocation
     private const val versionGeoLocation = "20.0.0"
+    // Paging
+    private const val versionPaging = "3.1.1"
     // Test
     private const val versionTestJUnit = "4.+"
     private const val versionTestAndroidxJUnit = "1.1.2"
     private const val versionTestEspresso = "3.3.0"
+    private const val versionMockito = "4.0.0"
 
 
 
@@ -41,6 +44,10 @@ object Dependencies {
         const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versionLifecycle"
         const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versionLifecycle"
         const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$versionLifecycle"
+    }
+
+    object Javax {
+        const val inject = "javax.inject:javax.inject:1"
     }
 
     object Room {
@@ -89,6 +96,13 @@ object Dependencies {
         const val jUnit = "junit:junit:$versionTestJUnit"
         const val androidJUnit = "androidx.test.ext:$versionTestAndroidxJUnit"
         const val espresso = "androidx.test.espresso:espresso-core:$versionTestEspresso"
+        const val mockitoCore = "org.mockito:mockito-core:$versionMockito"
+        const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:$versionMockito"
+    }
+
+    object Paging {
+        const val runtime = "androidx.paging:paging-runtime-ktx:$versionPaging"
+        const val common = "androidx.paging:paging-common:$versionPaging"
     }
 
 }

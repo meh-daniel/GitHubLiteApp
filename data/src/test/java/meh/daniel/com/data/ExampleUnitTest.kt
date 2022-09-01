@@ -1,8 +1,5 @@
-package meh.daniel.com.githubliteapp
+package meh.daniel.com.data
 
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.map
 import org.junit.Test
 
 import org.junit.Assert.*

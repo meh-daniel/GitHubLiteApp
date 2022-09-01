@@ -1,9 +1,9 @@
 pluginManagement {
     repositories {
         gradlePluginPortal()
-        jcenter()
         google()
         mavenCentral()
+        maven { url = uri("https://jitpack.io") }
     }
     resolutionStrategy {
         eachPlugin {
@@ -21,3 +21,5 @@ pluginManagement {
 }
 rootProject.name = "GitHubLiteApp"
 include(":app")
+include(":data")
+include(":domain")

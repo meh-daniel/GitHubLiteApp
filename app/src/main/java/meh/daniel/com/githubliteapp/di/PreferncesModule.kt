@@ -7,7 +7,7 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
-import meh.daniel.com.githubliteapp.data.preferences.PreferencesHelper
+import meh.daniel.com.data.preferences.PreferencesHelper
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -17,5 +17,5 @@ object PreferencesModule {
     @Provides
     fun providePreferencesHelper(
         @ApplicationContext context: Context
-    ) = PreferencesHelper(context)
+    ) = meh.daniel.com.data.preferences.PreferencesHelper(context)
 }

@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.ItemRepositoryBinding
-import meh.daniel.com.githubliteapp.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.Repository
 
 class RepositoryAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(RepositoryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when(viewType){
