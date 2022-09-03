@@ -16,12 +16,12 @@ import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
 import meh.daniel.com.githubliteapp.presentation.ui.Event
+import meh.daniel.com.githubliteapp.presentation.utils.observeInLifecycle
 
 @AndroidEntryPoint
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth){
 
     override val viewModel: AuthViewModel by viewModels()
-    private var job: Job? = null
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -41,7 +41,6 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
 
     override fun onStop() {
         super.onStop()
-        job?.cancel()
     }
 
     private fun initButtonSignIn() {
@@ -65,7 +64,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     }
 
     private fun eventFlowLifecycle(){
-        job = viewModel.eventFlow
+        viewModel.eventFlow
             .onEach { event ->
                 when(event) {
                     is Event.ShowSnackbar -> {
@@ -73,7 +72,6 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
                     }
                 }
             }
-            .flowWithLifecycle(lifecycle = viewLifecycleOwner.lifecycle, minActiveState = Lifecycle.State.STARTED)
-            .launchIn(viewLifecycleOwner.lifecycleScope)
+            .observeInLifecycle(viewLifecycleOwner)
     }
 }
