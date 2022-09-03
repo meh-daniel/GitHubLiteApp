@@ -60,7 +60,7 @@ abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(
     /**
      * Collect flow safely with [repeatOnLifecycle] API
      */
-    protected fun collectFlowSafely(
+    private fun collectFlowSafely(
         lifecycleState: Lifecycle.State,
         collect: suspend () -> Unit
     ) {

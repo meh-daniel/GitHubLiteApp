@@ -1,6 +1,5 @@
 package meh.daniel.com.githubliteapp.presentation.utils
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
@@ -8,6 +7,11 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.launch
+
+/**
+ * Given the design of the FlowObserver, I am grateful to this article:
+ * https://proandroiddev.com/android-singleliveevent-redux-with-kotlin-flow-b755c70bb055
+ */
 
 class FlowObserver<T> (
     lifecycleOwner: LifecycleOwner,
