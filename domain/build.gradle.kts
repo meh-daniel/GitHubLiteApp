@@ -16,10 +16,10 @@ java {
 dependencies {
 
     // Javax Inject
-    api(Dependencies.Javax.inject)
+    implementation(Dependencies.Javax.inject)
 
     // Kotlin
-    api(Dependencies.Coroutines.core)
+    implementation(Dependencies.Coroutines.core)
 
     // Paging
     implementation(Dependencies.Paging.common)

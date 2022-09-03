@@ -1,17 +1,17 @@
 package meh.daniel.com.githubliteapp.presentation.ui.auth
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
-import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
@@ -21,6 +21,7 @@ import meh.daniel.com.githubliteapp.presentation.ui.Event
 class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.fragment_auth){
 
     override val viewModel: AuthViewModel by viewModels()
+    private var job: Job? = null
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -38,6 +39,17 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         subscribeToAction()
     }
 
+    override fun onStop() {
+        super.onStop()
+        job?.cancel()
+    }
+
+    private fun initButtonSignIn() {
+        binding.signInBtn.setOnClickListener {
+            viewModel.onSignButtonPressed(binding.tokenEdTxt.text.toString())
+        }
+    }
+
     private fun subscribeToAction() {
         viewModel.validationState.collectUIState(
             state = {
@@ -52,24 +64,16 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         )
     }
 
-    private fun initButtonSignIn() {
-        binding.signInBtn.setOnClickListener {
-            viewModel.onSignButtonPressed(binding.tokenEdTxt.text.toString())
-        }
-    }
-
-    @SuppressLint("UnsafeRepeatOnLifecycleDetector")
     private fun eventFlowLifecycle(){
-        lifecycleScope.launch(Dispatchers.Main) {
-            repeatOnLifecycle(Lifecycle.State.CREATED) {
-                viewModel.eventFlow.collect() { event ->
-                    when(event) {
-                        is Event.ShowSnackbar -> {
-                            Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
-                        }
+        job = viewModel.eventFlow
+            .onEach { event ->
+                when(event) {
+                    is Event.ShowSnackbar -> {
+                        Snackbar.make(binding.root, event.message, Snackbar.LENGTH_SHORT).show()
                     }
                 }
             }
-        }
+            .flowWithLifecycle(lifecycle = viewLifecycleOwner.lifecycle, minActiveState = Lifecycle.State.STARTED)
+            .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 }

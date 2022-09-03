@@ -2,9 +2,9 @@ package meh.daniel.com.data.repositories
 
 import meh.daniel.com.data.nw.GitHubApi
 import meh.daniel.com.data.toDomain
-import meh.daniel.com.githubliteapp.domain.repositories.AppRepository
-import meh.daniel.com.githubliteapp.domain.model.repository.Repository
-import meh.daniel.com.githubliteapp.domain.model.repository.RepositoryDetails
+import meh.daniel.com.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.RepositoryDetails
+import meh.daniel.com.domain.repositories.AppRepository
 
 class AppRepositoryImpl(
     private val gitHubApi: GitHubApi

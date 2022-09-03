@@ -6,7 +6,11 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -23,7 +27,7 @@ class AuthViewModel @Inject constructor(
     private val _token: MutableLiveData<String> = MutableLiveData()
     var token : LiveData<String> = _token
 
-    private val _eventChanel = Channel<Event>()
+    private val _eventChanel = Channel<Event>(Channel.BUFFERED)
     var eventFlow = _eventChanel.receiveAsFlow()
 
     private val _actionChannel = Channel<AuthAction>()
@@ -37,7 +41,7 @@ class AuthViewModel @Inject constructor(
             val repo = signRepository.signIn(token = "Token $token")
             if (!repo.successful){
                 sendEvent(Event.ShowSnackbar(repo.errorMessage!!))
-                sendAction(AuthAction.ShowError(repo.errorMessage))
+                sendAction(AuthAction.ShowError(repo.errorMessage!!))
             } else{
                 sendAction(AuthAction.RouteToMain)
             }

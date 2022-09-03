@@ -18,15 +18,15 @@ class DataModule {
     @Provides
     @Singleton
     fun provideAppRepository(
-        @Named("GitHubApi") gitHubApi: meh.daniel.com.data.nw.GitHubApi
+        @Named("GitHubApi") gitHubApi: GitHubApi
     ) : AppRepository {
-        return meh.daniel.com.data.repositories.AppRepositoryImpl(gitHubApi)
+        return AppRepositoryImpl(gitHubApi)
     }
     @Provides
     @Singleton
     fun provideTokenRepository(
-        @Named("GitHubApi") gitHubApi: meh.daniel.com.data.nw.GitHubApi
+        @Named("GitHubApi") gitHubApi: GitHubApi
     ) : SignRepository {
-        return meh.daniel.com.data.repositories.SignRepositoryImpl(gitHubApi)
+        return SignRepositoryImpl(gitHubApi)
     }
 }

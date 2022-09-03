@@ -3,9 +3,9 @@ package meh.daniel.com.data.repositories
 import meh.daniel.com.data.BaseRepository
 import meh.daniel.com.data.nw.GitHubApi
 import meh.daniel.com.data.toDomain
-import meh.daniel.com.githubliteapp.domain.model.token.SignIn
-import meh.daniel.com.githubliteapp.domain.repositories.SignRepository
-import meh.daniel.com.githubliteapp.domain.model.token.ValidationResult
+import meh.daniel.com.domain.model.token.SignIn
+import meh.daniel.com.domain.model.token.ValidationResult
+import meh.daniel.com.domain.repositories.SignRepository
 
 class SignRepositoryImpl(
     private val gitHubApi: GitHubApi

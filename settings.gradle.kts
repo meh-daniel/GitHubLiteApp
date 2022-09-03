@@ -20,6 +20,8 @@ pluginManagement {
     }
 }
 rootProject.name = "GitHubLiteApp"
-include(":app")
-include(":data")
-include(":domain")
+include(
+    ":app",
+    ":data",
+    ":domain"
+)

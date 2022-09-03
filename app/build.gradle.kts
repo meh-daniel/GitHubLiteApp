@@ -67,6 +67,12 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":domain"))
 
+
+    // Network
+    implementation(Dependencies.Network.retrofit2)
+    implementation(Dependencies.Network.retrofit2Gson)
+    implementation(Dependencies.Network.logging)
+
     // Hilt
     implementation(Dependencies.Hilt.android)
     kapt(Dependencies.Hilt.compiler)

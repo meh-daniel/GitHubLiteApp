@@ -67,8 +67,8 @@ class NetworkModule {
     @Named("GitHubApi")
     fun provideWeatherApi(
         @Named("retrofitGitHubApiBuilder") retrofit: Retrofit
-    ) : meh.daniel.com.data.nw.GitHubApi {
-        return retrofit.create(meh.daniel.com.data.nw.GitHubApi::class.java)
+    ) : GitHubApi {
+        return retrofit.create(GitHubApi::class.java)
     }
 
 }
