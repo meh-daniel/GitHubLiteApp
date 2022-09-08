@@ -10,11 +10,8 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
-import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.presentation.ui.Event
 import meh.daniel.com.githubliteapp.presentation.ui.UIState
 
 abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(

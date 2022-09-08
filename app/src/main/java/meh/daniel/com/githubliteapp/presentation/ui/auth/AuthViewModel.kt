@@ -19,6 +19,18 @@ import meh.daniel.com.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 import meh.daniel.com.githubliteapp.presentation.ui.Event
 
+
+sealed interface State {
+    object Idle : State
+    object Loading : State
+    data class InvalidInput(val reason: String) : State
+}
+
+sealed interface Action {
+    data class ShowError(val message: String) : Action
+    object RouteToMain : Action
+}
+
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val signRepository: SignRepository

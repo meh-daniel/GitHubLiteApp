@@ -1,5 +1,6 @@
 package meh.daniel.com.data.repositories
 
+import android.content.SharedPreferences
 import meh.daniel.com.data.BaseRepository
 import meh.daniel.com.data.nw.GitHubApi
 import meh.daniel.com.data.toDomain
@@ -38,7 +39,6 @@ class SignRepositoryImpl(
     }
 
     private fun setupSignInSuccess(signIn: SignIn){
-        //TODO: ну в общем тут через preferences хелпер будет как то сохраняться
-    }
 
+    }
 }

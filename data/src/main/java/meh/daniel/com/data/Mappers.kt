@@ -3,9 +3,9 @@ package meh.daniel.com.data
 import meh.daniel.com.data.nw.modelNW.RepositoriesNW
 import meh.daniel.com.data.nw.modelNW.RepositoryReadmeNW
 import meh.daniel.com.data.nw.modelNW.UserInfoNW
-import meh.daniel.com.githubliteapp.domain.model.repository.Repository
-import meh.daniel.com.githubliteapp.domain.model.repository.RepositoryDetails
-import meh.daniel.com.githubliteapp.domain.model.UserInfo
+import meh.daniel.com.domain.model.UserInfo
+import meh.daniel.com.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.RepositoryDetails
 
 internal fun List<RepositoriesNW>.toDomain(): List<Repository> {
     return map {

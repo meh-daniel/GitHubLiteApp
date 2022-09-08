@@ -5,7 +5,6 @@ import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import meh.daniel.com.githubliteapp.presentation.ui.Event
-import meh.daniel.com.githubliteapp.presentation.ui.UIState
 
 abstract class BaseViewModel : ViewModel() {
     /**

@@ -44,7 +44,9 @@ android {
 
 dependencies {
     implementation(project(":domain"))
-
+    // Coroutines
+    implementation(Dependencies.Coroutines.core)
+    implementation(Dependencies.Coroutines.android)
     // Network
     implementation(Dependencies.Network.retrofit2)
     implementation(Dependencies.Network.retrofit2Gson)

@@ -10,7 +10,7 @@ import meh.daniel.com.githubliteapp.databinding.FragmentRepositoryinfoBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
-class RepositoryInfoFragment : BaseFragment<RepositoryInfoViewModel, FragmentRepositoryinfoBinding>(R.layout.fragment_repositoryinfo){
+class DetailInfoFragment : BaseFragment<RepositoryInfoViewModel, FragmentRepositoryinfoBinding>(R.layout.fragment_repositoryinfo){
 
     override val viewModel: RepositoryInfoViewModel by viewModels()
 
