@@ -10,7 +10,7 @@ import kotlinx.coroutines.flow.onEach
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
-import meh.daniel.com.githubliteapp.presentation.ui.Event
+import meh.daniel.com.githubliteapp.presentation.utils.Event
 import meh.daniel.com.githubliteapp.presentation.utils.observeInLifecycle
 
 @AndroidEntryPoint

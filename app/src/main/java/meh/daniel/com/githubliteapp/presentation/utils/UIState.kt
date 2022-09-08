@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui
+package meh.daniel.com.githubliteapp.presentation.utils
 
 sealed class UIState<T> {
     class Idle<T> : UIState<T>()

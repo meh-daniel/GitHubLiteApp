@@ -12,7 +12,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.viewbinding.ViewBinding
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.githubliteapp.presentation.ui.UIState
+import meh.daniel.com.githubliteapp.presentation.utils.UIState
 
 abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(
     @LayoutRes layoutId: Int
