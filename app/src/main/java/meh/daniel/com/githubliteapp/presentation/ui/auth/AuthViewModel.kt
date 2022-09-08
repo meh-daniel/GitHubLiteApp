@@ -7,14 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.domain.model.token.ValidationResult
 import meh.daniel.com.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 import meh.daniel.com.githubliteapp.presentation.utils.Event
-
 
 sealed interface State {
     object Idle : State
@@ -38,10 +37,10 @@ class AuthViewModel @Inject constructor(
     private val _eventChanel = Channel<Event>(Channel.BUFFERED)
     var eventFlow = _eventChanel.receiveAsFlow()
 
-    private val _actionChannel = Channel<AuthAction>()
+    private val _actionChannel = Channel<Action>()
     var actionFlow = _actionChannel.receiveAsFlow()
 
-    private val _validationState = MutableUIStateFlow<ValidationResult>()
+    private val _validationState = MutableStateFlow<State>(State.Idle)
     val validationState = _validationState.asStateFlow()
 
     fun onSignButtonPressed(token: String) {
@@ -49,9 +48,9 @@ class AuthViewModel @Inject constructor(
             val repo = signRepository.signIn(token = "Token $token")
             if (!repo.successful){
                 sendEvent(Event.ShowSnackbar(repo.errorMessage!!))
-                sendAction(AuthAction.ShowError(repo.errorMessage!!))
+                sendAction(Action.ShowError(repo.errorMessage!!))
             } else{
-                sendAction(AuthAction.RouteToMain)
+                sendAction(Action.RouteToMain)
             }
         }
     }
@@ -61,7 +60,7 @@ class AuthViewModel @Inject constructor(
             _eventChanel.send(event)
         }
     }
-    private fun sendAction(action: AuthAction){
+    private fun sendAction(action: Action){
         viewModelScope.launch(Dispatchers.IO){
             _actionChannel.send(action)
         }

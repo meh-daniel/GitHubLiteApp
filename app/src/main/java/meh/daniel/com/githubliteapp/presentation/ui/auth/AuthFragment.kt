@@ -3,7 +3,6 @@ package meh.daniel.com.githubliteapp.presentation.ui.auth
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
@@ -41,17 +40,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     }
 
     private fun subscribeToAction() {
-        viewModel.validationState.collectUIState(
-            state = {
 
-            },
-            onError = {
-                viewModel.sendEvent(Event.ShowSnackbar("AAAAA"))
-            },
-            onSuccess = {
-                findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
-            }
-        )
     }
 
     private fun eventFlowLifecycle(){
