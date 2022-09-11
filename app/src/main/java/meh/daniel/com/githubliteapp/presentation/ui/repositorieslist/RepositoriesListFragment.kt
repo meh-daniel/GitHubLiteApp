@@ -1,6 +1,5 @@
 package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
-import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
@@ -27,7 +26,6 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
         observableViewModel()
     }
 
-    @SuppressLint("FragmentLiveDataObserve")
     private fun observableViewModel() {
         viewModel.repositories.observe(this@RepositoriesListFragment) {
             repositoryAdapter.submitList(it)

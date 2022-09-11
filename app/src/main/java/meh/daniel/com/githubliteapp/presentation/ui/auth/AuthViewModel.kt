@@ -6,6 +6,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -14,15 +15,15 @@ import kotlinx.coroutines.launch
 import meh.daniel.com.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
-sealed class State {
-    object Idle : State()
-    object Loading : State()
-    data class InvalidInput(val reason: String) : State()
+sealed interface State {
+    object Idle : State
+    object Loading : State
+    data class InvalidInput(val reason: String) : State
 }
 
-sealed class Action {
-    data class ShowError(val message: String) : Action()
-    object RouteToMain : Action()
+sealed interface Action {
+    data class ShowError(val message: String) : Action
+    object RouteToMain : Action
 }
 
 @HiltViewModel
@@ -30,8 +31,8 @@ class AuthViewModel @Inject constructor(
     private val signRepository: SignRepository
 ) : BaseViewModel(){
 
-    private val _actionChannel = Channel<Action>()
-    var actionFlow = _actionChannel.receiveAsFlow()
+    private val _action: Channel<Action> = Channel(Channel.BUFFERED)
+    var actionFlow: Flow<Action> = _action.receiveAsFlow()
 
     private val _stateChannel = MutableStateFlow<State>(State.Idle)
     val stateFlow = _stateChannel.asStateFlow()
@@ -59,7 +60,7 @@ class AuthViewModel @Inject constructor(
 
     fun sendAction(action: Action){
         viewModelScope.launch(Dispatchers.Main){
-            _actionChannel.send(action)
+            _action.send(action)
         }
     }
 }

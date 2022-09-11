@@ -42,20 +42,6 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         }
     }
 
-    private fun startLoading(){
-        with(binding){
-            signInBtn.text = ""
-            progressBarOfButton.visibility = View.VISIBLE
-        }
-    }
-
-    private fun stopLoading(){
-        with(binding){
-            signInBtn.text = getText(R.string.sign_in)
-            progressBarOfButton.visibility = View.INVISIBLE
-        }
-    }
-
     private fun setupObservableEditText(){
         viewModel.token.onEach { token ->
             binding.tokenEdTxt.setText(token)
@@ -80,18 +66,8 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun setupSubscriberState(){
         viewModel.stateFlow
             .onEach { state ->
-                when(state) {
-                    is State.Idle -> {
-                        stopLoading()
-                    }
-                    is State.Loading -> {
-                        startLoading()
-                    }
-                    is State.InvalidInput -> {
-                        stopLoading()
-                        viewModel.sendAction(Action.ShowError(state.reason))
-                    }
-                }
+                binding.signInBtn.text = if(state == State.Loading) "" else getText(R.string.sign_in)
+                binding.progressBarOfButton.visibility = if(state == State.Loading) View.VISIBLE else View.INVISIBLE
             }
             .observeInLifecycle(viewLifecycleOwner)
     }

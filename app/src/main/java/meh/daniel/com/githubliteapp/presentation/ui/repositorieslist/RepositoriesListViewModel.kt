@@ -11,11 +11,11 @@ import meh.daniel.com.domain.repositories.AppRepository
 import meh.daniel.com.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
-sealed class State {
-    object Loading : State()
-    data class Loaded(val repos: List<Repository>) : State()
-    data class Error(val error: String) : State()
-    object Empty : State()
+sealed interface State {
+    object Loading : State
+    data class Loaded(val repos: List<Repository>) : State
+    data class Error(val error: String) : State
+    object Empty : State
 }
 
 @HiltViewModel
@@ -32,12 +32,12 @@ class RepositoriesListViewModel @Inject constructor(
 
     private fun loadRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
-//            try {
-//                val repositories = repository.getRepositories("Token 127965625f147d17c24bd1c9f87d019324873042")
-//                _repositories.postValue(repositories)
-//            } catch (e : Throwable) {
-//                Log.e("xxx", "error Load")
-//            }
+            try {
+                val repositories = repository.getRepositories()
+                _repositories.postValue(repositories)
+            } catch (e : Throwable) {
+
+            }
         }
     }
 
