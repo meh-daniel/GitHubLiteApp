@@ -49,26 +49,26 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     }
 
     private fun setupSubscriberAction() {
-        viewModel.actionFlow
-            .onEach { action ->
-                when(action) {
-                    is AuthViewModel.Action.RouteToMain -> {
-                        findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
-                    }
-                    is AuthViewModel.Action.ShowError -> {
-                        Snackbar.make(binding.root, action.message, Snackbar.LENGTH_SHORT).show()
-                    }
+        viewModel.actionFlow.onEach { action ->
+            when(action) {
+                is AuthViewModel.Action.RouteToMain -> {
+                    findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
+                }
+                is AuthViewModel.Action.ShowError -> {
+                    viewModel.showError(action.message)
                 }
             }
-            .observeInLifecycle(viewLifecycleOwner)
+        }.observeInLifecycle(viewLifecycleOwner)
     }
 
     private fun setupSubscriberState(){
-        viewModel.stateFlow
-            .onEach { state ->
-                binding.signInBtn.text = if(state == AuthViewModel.State.Loading) "" else getText(R.string.sign_in)
-                binding.progressBarOfButton.visibility = if(state == AuthViewModel.State.Loading) View.VISIBLE else View.INVISIBLE
+        viewModel.stateFlow.onEach { state ->
+            with(binding){
+                signInBtn.text = if(state is AuthViewModel.State.Loading) "" else getText(R.string.sign_in)
+                progressBarOfButton.visibility = if(state is AuthViewModel.State.Loading) View.VISIBLE else View.INVISIBLE
+                errorTxt.visibility = if(state is AuthViewModel.State.InvalidInput) View.VISIBLE else View.INVISIBLE
+                errorTxt.text = if(state is AuthViewModel.State.InvalidInput) state.reason else ""
             }
-            .observeInLifecycle(viewLifecycleOwner)
+        }.observeInLifecycle(viewLifecycleOwner)
     }
 }

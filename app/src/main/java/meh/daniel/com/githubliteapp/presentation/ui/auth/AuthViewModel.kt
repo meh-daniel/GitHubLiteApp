@@ -20,39 +20,6 @@ class AuthViewModel @Inject constructor(
     private val signRepository: SignRepository
 ) : BaseViewModel(){
 
-    private val _action: Channel<Action> = Channel(Channel.BUFFERED)
-    var actionFlow: Flow<Action> = _action.receiveAsFlow()
-
-    private val _stateChannel = MutableStateFlow<State>(State.Idle)
-    val stateFlow = _stateChannel.asStateFlow()
-
-    private val _token = MutableStateFlow("")
-    val token : StateFlow<String> = _token.asStateFlow()
-
-    fun onSignButtonPressed() {
-        viewModelScope.launch(Dispatchers.IO){
-            _stateChannel.value = State.Loading
-            delay(2000L)
-            val repo = signRepository.signIn(token = "Token ${_token.value}")
-            if (!repo.successful){
-                sendAction(Action.ShowError(repo.errorMessage!!))
-            } else{
-                sendAction(Action.RouteToMain)
-            }
-            _stateChannel.value = State.Idle
-        }
-    }
-
-    fun setToken(token: String){
-        _token.value = token
-    }
-
-    fun sendAction(action: Action){
-        viewModelScope.launch(Dispatchers.Main){
-            _action.send(action)
-        }
-    }
-
     sealed interface State {
         object Idle : State
         object Loading : State
@@ -62,6 +29,45 @@ class AuthViewModel @Inject constructor(
     sealed interface Action {
         data class ShowError(val message: String) : Action
         object RouteToMain : Action
+    }
+
+    private val _action: Channel<Action> = Channel(Channel.BUFFERED)
+    var actionFlow: Flow<Action> = _action.receiveAsFlow()
+
+    private val _state = MutableStateFlow<State>(State.Idle)
+    val stateFlow: Flow<State> = _state.asStateFlow()
+
+    private val _token = MutableStateFlow("")
+    val token : StateFlow<String> = _token.asStateFlow()
+
+    fun onSignButtonPressed() {
+        viewModelScope.launch(Dispatchers.IO){
+            _state.value = State.Loading
+            delay(2000L)
+            val repo = signRepository.signIn(token = "Token ${_token.value}")
+            if (!repo.successful){
+                sendAction(Action.ShowError(repo.errorMessage!!))
+            } else{
+                sendAction(Action.RouteToMain)
+                delay(7000L)
+                _state.value = State.Idle
+            }
+            _state.value = State.Idle
+        }
+    }
+
+    fun showError(message: String) {
+        _state.value = State.InvalidInput(reason = message)
+    }
+
+    fun setToken(token: String){
+        _token.value = token
+    }
+
+    private fun sendAction(action: Action){
+        viewModelScope.launch(Dispatchers.Main){
+            _action.send(action)
+        }
     }
 
 }

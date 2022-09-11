@@ -11,6 +11,10 @@
         <item name="android:textColor">@color/grey_500</item>
     </style>
 
+    <style name="errorMessage" parent="text_subtitle_1">
+        <item name="android:textColor">#FF0000</item>
+    </style>
+
     <style name="editText">
         <item name="android:backgroundTint">@color/grey_500</item>
         <item name="android:textColor">@color/grey_500</item>
