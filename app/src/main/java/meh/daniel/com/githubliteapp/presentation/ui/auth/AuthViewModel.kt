@@ -15,15 +15,15 @@ import meh.daniel.com.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 import meh.daniel.com.githubliteapp.presentation.utils.Event
 
-sealed interface State {
-    object Idle : State
-    object Loading : State
-    data class InvalidInput(val reason: String) : State
+sealed class State {
+    object Idle : State()
+    object Loading : State()
+    data class InvalidInput(val reason: String) : State()
 }
 
-sealed interface Action {
-    data class ShowError(val message: String) : Action
-    object RouteToMain : Action
+sealed class Action {
+    data class ShowError(val message: String) : Action()
+    object RouteToMain : Action()
 }
 
 @HiltViewModel
@@ -31,37 +31,27 @@ class AuthViewModel @Inject constructor(
     private val signRepository: SignRepository
 ) : BaseViewModel(){
 
-    private val _token: MutableLiveData<String> = MutableLiveData()
+    private val _token: MutableStateFlow<String>()
     var token : LiveData<String> = _token
-
-    private val _eventChanel = Channel<Event>(Channel.BUFFERED)
-    var eventFlow = _eventChanel.receiveAsFlow()
 
     private val _actionChannel = Channel<Action>()
     var actionFlow = _actionChannel.receiveAsFlow()
 
-    private val _validationState = MutableStateFlow<State>(State.Idle)
-    val validationState = _validationState.asStateFlow()
+    private val _stateChannel = MutableStateFlow<State>(State.Idle)
+    val stateFlow = _stateChannel.asStateFlow()
 
     fun onSignButtonPressed(token: String) {
         viewModelScope.launch(Dispatchers.IO){
             val repo = signRepository.signIn(token = "Token $token")
             if (!repo.successful){
-                sendEvent(Event.ShowSnackbar(repo.errorMessage!!))
                 sendAction(Action.ShowError(repo.errorMessage!!))
             } else{
                 sendAction(Action.RouteToMain)
             }
         }
     }
-
-    fun sendEvent(event: Event){
-        viewModelScope.launch(Dispatchers.IO){
-            _eventChanel.send(event)
-        }
-    }
-    private fun sendAction(action: Action){
-        viewModelScope.launch(Dispatchers.IO){
+    fun sendAction(action: Action){
+        viewModelScope.launch(Dispatchers.Main){
             _actionChannel.send(action)
         }
     }
