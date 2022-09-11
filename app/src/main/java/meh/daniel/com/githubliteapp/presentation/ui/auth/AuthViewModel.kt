@@ -15,17 +15,6 @@ import kotlinx.coroutines.launch
 import meh.daniel.com.domain.repositories.SignRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
-sealed interface State {
-    object Idle : State
-    object Loading : State
-    data class InvalidInput(val reason: String) : State
-}
-
-sealed interface Action {
-    data class ShowError(val message: String) : Action
-    object RouteToMain : Action
-}
-
 @HiltViewModel
 class AuthViewModel @Inject constructor(
     private val signRepository: SignRepository
@@ -63,4 +52,16 @@ class AuthViewModel @Inject constructor(
             _action.send(action)
         }
     }
+
+    sealed interface State {
+        object Idle : State
+        object Loading : State
+        data class InvalidInput(val reason: String) : State
+    }
+
+    sealed interface Action {
+        data class ShowError(val message: String) : Action
+        object RouteToMain : Action
+    }
+
 }

@@ -52,10 +52,10 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         viewModel.actionFlow
             .onEach { action ->
                 when(action) {
-                    is Action.RouteToMain -> {
+                    is AuthViewModel.Action.RouteToMain -> {
                         findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
                     }
-                    is Action.ShowError -> {
+                    is AuthViewModel.Action.ShowError -> {
                         Snackbar.make(binding.root, action.message, Snackbar.LENGTH_SHORT).show()
                     }
                 }
@@ -66,8 +66,8 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun setupSubscriberState(){
         viewModel.stateFlow
             .onEach { state ->
-                binding.signInBtn.text = if(state == State.Loading) "" else getText(R.string.sign_in)
-                binding.progressBarOfButton.visibility = if(state == State.Loading) View.VISIBLE else View.INVISIBLE
+                binding.signInBtn.text = if(state == AuthViewModel.State.Loading) "" else getText(R.string.sign_in)
+                binding.progressBarOfButton.visibility = if(state == AuthViewModel.State.Loading) View.VISIBLE else View.INVISIBLE
             }
             .observeInLifecycle(viewLifecycleOwner)
     }
