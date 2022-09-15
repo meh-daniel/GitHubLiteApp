@@ -8,7 +8,7 @@ import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import meh.daniel.com.domain.repositories.SessionRepository
-import meh.daniel.com.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.Repo
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
@@ -16,8 +16,8 @@ class RepositoriesListViewModel @Inject constructor(
     private val repository: SessionRepository
 ) : BaseViewModel() {
 
-    private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
-    var repositories: LiveData<List<Repository>> = _repositories
+    private val _repositories: MutableLiveData<List<Repo>> = MutableLiveData()
+    var repositories: LiveData<List<Repo>> = _repositories
 
     init {
         loadRepositories()
@@ -36,7 +36,7 @@ class RepositoriesListViewModel @Inject constructor(
 
     sealed interface State {
         object Loading : State
-        data class Loaded(val repos: List<Repository>) : State
+        data class Loaded(val repos: List<Repo>) : State
         data class Error(val error: String) : State
         object Empty : State
     }

@@ -3,13 +3,13 @@ package meh.daniel.com.data
 import meh.daniel.com.data.nw.modelNW.RepositoriesNW
 import meh.daniel.com.data.nw.modelNW.RepositoryReadmeNW
 import meh.daniel.com.data.nw.modelNW.UserInfoNW
-import meh.daniel.com.domain.model.UserInfo
-import meh.daniel.com.domain.model.repository.Repository
-import meh.daniel.com.domain.model.repository.RepositoryDetails
+import meh.daniel.com.domain.model.user.UserInfo
+import meh.daniel.com.domain.model.repository.Repo
+import meh.daniel.com.domain.model.repository.RepoDetails
 
-internal fun List<RepositoriesNW>.toDomain(): List<Repository> {
+internal fun List<RepositoriesNW>.toDomain(): List<Repo> {
     return map {
-        Repository(
+        Repo(
             name = it.name,
             language = it.language,
             description = it.description
@@ -19,12 +19,12 @@ internal fun List<RepositoriesNW>.toDomain(): List<Repository> {
 
 internal fun UserInfoNW.toDomain() : UserInfo {
     return UserInfo(
-        info = name
+        name = name
     )
 }
 
-internal fun RepositoriesNW.toDomain(): RepositoryDetails {
-    return RepositoryDetails(
+internal fun RepositoriesNW.toDomain(): RepoDetails {
+    return RepoDetails(
         nameRepo =  name
     )
 }

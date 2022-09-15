@@ -1,6 +1,6 @@
 package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
 
-import meh.daniel.com.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.Repo
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 class RepositoryInfoViewModel : BaseViewModel() {
@@ -11,7 +11,7 @@ class RepositoryInfoViewModel : BaseViewModel() {
         data class Error(val error: String) : State
 
         data class Loaded(
-            val githubRepo: Repository,
+            val githubRepo: Repo,
             val readmeState: ReadmeState
         ) : State
     }

@@ -42,6 +42,9 @@ android {
 
 dependencies {
     implementation(project(":domain"))
+    // inject
+    implementation(Dependencies.Javax.inject)
+    implementation(Dependencies.Hilt.android)
     // Coroutines
     implementation(Dependencies.Coroutines.core)
     implementation(Dependencies.Coroutines.android)

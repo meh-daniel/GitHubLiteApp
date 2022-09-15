@@ -8,9 +8,9 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.ItemRepositoryBinding
-import meh.daniel.com.domain.model.repository.Repository
+import meh.daniel.com.domain.model.repository.Repo
 
-class RepositoryAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(RepositoryDiffUtil()) {
+class RepositoryAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepositoryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when(viewType){
         R.layout.item_repository -> RepositoryViewHolder.from(parent)
         else ->  throw Throwable("onCreateViewHolder exception - unknown view type by name: $viewType")
@@ -22,13 +22,13 @@ class RepositoryAdapter : ListAdapter<Repository, RecyclerView.ViewHolder>(Repos
     }
 
     override fun getItemViewType(position: Int): Int = when(getItem(position)){
-        is Repository -> R.layout.item_repository
+        is Repo -> R.layout.item_repository
         else -> throw Exception("getItemViewType unknown item class exception from position: $position")
     }
 }
 
 class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : RecyclerView.ViewHolder(binding.root){
-    fun bind(item: Repository){
+    fun bind(item: Repo){
         binding.nameRepositoryTxt.text = item.name
         binding.programmingLanguageTxt.text = item.language
         if(item.description != null){
@@ -46,14 +46,14 @@ class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : Recycle
     }
 }
 
-class RepositoryDiffUtil: DiffUtil.ItemCallback<Repository>() {
+class RepositoryDiffUtil: DiffUtil.ItemCallback<Repo>() {
     override fun areItemsTheSame(
-        oldItem: Repository,
-        newItem: Repository
+        oldItem: Repo,
+        newItem: Repo
     ): Boolean = oldItem == newItem
 
     override fun areContentsTheSame(
-        oldItem: Repository,
-        newItem: Repository
+        oldItem: Repo,
+        newItem: Repo
     ): Boolean = oldItem == newItem
 }

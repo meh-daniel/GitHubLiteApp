@@ -1,4 +1,4 @@
-package meh.daniel.com.domain.model.token
+package meh.daniel.com.domain.model
 
 data class ValidationResult(
     val successful: Boolean,

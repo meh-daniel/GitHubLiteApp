@@ -1,12 +1,13 @@
 package meh.daniel.com.domain.repositories
 
-import meh.daniel.com.domain.model.repository.Repository
-import meh.daniel.com.domain.model.repository.RepositoryDetails
-import meh.daniel.com.domain.model.token.ValidationResult
+import meh.daniel.com.domain.model.repository.Repo
+import meh.daniel.com.domain.model.repository.RepoDetails
+import meh.daniel.com.domain.model.ValidationResult
 
 interface SessionRepository {
-    suspend fun getRepositories(): List<Repository>
-    suspend fun getRepository(id: Int): RepositoryDetails
+    suspend fun getRepositories(): List<Repo>
+    suspend fun getRepository(id: Int): RepoDetails
     suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): String
     suspend fun signIn(token: String): ValidationResult
+    suspend fun exitSession()
 }
