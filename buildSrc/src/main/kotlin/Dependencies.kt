@@ -1,49 +1,17 @@
 object Dependencies {
-    // Hilt
-    private const val versionHilt = "2.40.5"
-    // Lifecycle
-    private const val versionLifecycle = "2.4.0-alpha03"
-    // Navigation
-    private const val versionNavigation = "2.5.0"
-    // Coroutines
-    private const val versionCoroutines = "1.6.0"
-    // Network
-    private const val versionRetrofit2 = "2.6.2"
-    private const val versionLogging = "4.2.1"
-    // UI
-    private const val versionConstraintLayout = "2.1.4"
-    private const val versionRecyclerView = "1.2.1"
-    private const val versionProgressbar = "3.1.0"
-    private const val fragmentKtxVersion = "1.5.0"
-    private const val activityKtxVersion = "1.5.0"
-    // Android
-    private const val versionAndroidCoreKtx = "1.7.0"
-    private const val versionAndroidAppcompat = "1.4.2"
-    private const val versionAndroidMaterial = "1.6.1"
-    // Room
-    private const val versionRoom = "2.3.0"
-    private const val versionRoomPagind = "2.4.0-alpha04"
-    // GeoLocation
-    private const val versionGeoLocation = "20.0.0"
-    // Paging
-    private const val versionPaging = "3.1.1"
-    // Test
-    private const val versionTestJUnit = "4.+"
-    private const val versionTestAndroidxJUnit = "1.1.2"
-    private const val versionTestEspresso = "3.3.0"
-    private const val versionMockito = "4.0.0"
-
-
-
     object Hilt {
-        const val android = "com.google.dagger:hilt-android:$versionHilt"
-        const val compiler = "com.google.dagger:hilt-compiler:$versionHilt"
+        const val android = "com.google.dagger:hilt-android:${Versions.hilt}"
+        const val compiler = "com.google.dagger:hilt-compiler:${Versions.hilt}"
+    }
+
+    object DataStore  {
+        const val store = "androidx.datastore:datastore-preferences:1.0.0"
     }
 
     object Lifecycle {
-        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versionLifecycle"
-        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:$versionLifecycle"
-        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:$versionLifecycle"
+        const val viewmodel = "androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycle}"
+        const val livedata = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
+        const val runtime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     }
 
     object Javax {
@@ -51,58 +19,57 @@ object Dependencies {
     }
 
     object Room {
-        const val ktx = "androidx.room:room-ktx:$versionRoom"
-        const val runtime = "androidx.room:room-runtime:$versionRoom"
-        const val paging = "androidx.room:room-paging:$versionRoomPagind"
-        const val compiler = "androidx.room:room-compiler:$versionRoom"
+        const val ktx = "androidx.room:room-ktx:${Versions.room}"
+        const val runtime = "androidx.room:room-runtime:${Versions.room}"
+        const val paging = "androidx.room:room-paging:${Versions.roomPaging}"
+        const val compiler = "androidx.room:room-compiler:${Versions.room}"
     }
 
     object Geo {
-        const val playServices = "com.google.android.gms:play-services-location:$versionGeoLocation"
+        const val playServices = "com.google.android.gms:play-services-location:${Versions.geoLocation}"
     }
 
     object Navigation {
-        const val fragment = "androidx.navigation:navigation-fragment:$versionNavigation"
-        const val ui = "androidx.navigation:navigation-ui:$versionNavigation"
+        const val fragment = "androidx.navigation:navigation-fragment:${Versions.navigation}"
+        const val ui = "androidx.navigation:navigation-ui:${Versions.navigation}"
     }
 
     object Coroutines {
-        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versionCoroutines"
-        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versionCoroutines"
+        const val core = "org.jetbrains.kotlinx:kotlinx-coroutines-core:${Versions.coroutines}"
+        const val android = "org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutines}"
     }
 
     object Network {
-        const val retrofit2 = "com.squareup.retrofit2:retrofit:$versionRetrofit2"
-        const val retrofit2Gson = "com.squareup.retrofit2:converter-gson:$versionRetrofit2"
-        const val logging = "com.squareup.okhttp3:logging-interceptor:$versionLogging"
+        const val retrofit2 = "com.squareup.retrofit2:retrofit:${Versions.retrofit2}"
+        const val retrofit2Gson = "com.squareup.retrofit2:converter-gson:${Versions.retrofit2}"
+        const val logging = "com.squareup.okhttp3:logging-interceptor:${Versions.logging}"
     }
 
     object UI {
-        const val constraintLayout = "androidx.constraintlayout:constraintlayout:$versionConstraintLayout"
-        const val recyclerView = "androidx.recyclerview:recyclerview:$versionRecyclerView"
-        const val progressbar = "com.mikhaellopez:circularprogressbar:$versionProgressbar"
-        const val fragmentKtx = "androidx.fragment:fragment-ktx:$fragmentKtxVersion"
-        const val activityKtx = "androidx.activity:activity-ktx:$activityKtxVersion"
+        const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
+        const val recyclerView = "androidx.recyclerview:recyclerview:${Versions.recyclerView}"
+        const val progressbar = "com.mikhaellopez:circularprogressbar:${Versions.progressbar}"
+        const val fragmentKtx = "androidx.fragment:fragment-ktx:${Versions.fragmentKtx}"
+        const val activityKtx = "androidx.activity:activity-ktx:${Versions.activityKtx}"
     }
 
     object Android {
-        const val coreKtx = "androidx.core:core-ktx:$versionAndroidCoreKtx"
-        const val appCompat = "androidx.appcompat:appcompat:$versionAndroidAppcompat"
-        const val appCompatResources = "androidx.appcompat:appcompat:$versionAndroidAppcompat"
-        const val material = "com.google.android.material:material:$versionAndroidMaterial"
+        const val coreKtx = "androidx.core:core-ktx:${Versions.androidCoreKtx}"
+        const val appCompat = "androidx.appcompat:appcompat:${Versions.androidAppcompat}"
+        const val appCompatResources = "androidx.appcompat:appcompat:${Versions.androidAppcompat}"
+        const val material = "com.google.android.material:material:${Versions.androidMaterial}"
     }
 
     object Test {
-        const val jUnit = "junit:junit:$versionTestJUnit"
-        const val androidJUnit = "androidx.test.ext:$versionTestAndroidxJUnit"
-        const val espresso = "androidx.test.espresso:espresso-core:$versionTestEspresso"
-        const val mockitoCore = "org.mockito:mockito-core:$versionMockito"
-        const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:$versionMockito"
+        const val jUnit = "junit:junit:${Versions.testJUnit}"
+        const val androidJUnit = "androidx.test.ext:${Versions.testJUnit}"
+        const val espresso = "androidx.test.espresso:espresso-core:${Versions.testEspresso}"
+        const val mockitoCore = "org.mockito:mockito-core:${Versions.mockito}"
+        const val mockitoKotlin = "org.mockito.kotlin:mockito-kotlin:${Versions.mockito}"
     }
 
     object Paging {
-        const val runtime = "androidx.paging:paging-runtime-ktx:$versionPaging"
-        const val common = "androidx.paging:paging-common:$versionPaging"
+        const val runtime = "androidx.paging:paging-runtime-ktx:${Versions.paging}"
+        const val common = "androidx.paging:paging-common:${Versions.paging}"
     }
-
 }

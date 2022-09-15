@@ -4,12 +4,10 @@ plugins {
     kotlin(Plugins.Kotlin.android)
     kotlin(Plugins.Kotlin.kapt)
 }
-
 repositories {
-    google()
     mavenCentral()
+    google()
 }
-
 android {
     compileSdk = Config.compileSdk
 
@@ -71,6 +69,9 @@ dependencies {
     implementation(Dependencies.Network.retrofit2)
     implementation(Dependencies.Network.retrofit2Gson)
     implementation(Dependencies.Network.logging)
+
+    //
+    implementation(Dependencies.DataStore.store)
 
     // Hilt
     implementation(Dependencies.Hilt.android)

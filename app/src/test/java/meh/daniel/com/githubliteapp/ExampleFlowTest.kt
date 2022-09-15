@@ -1,7 +1,5 @@
 package meh.daniel.com.githubliteapp
 
-import java.util.concurrent.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.map

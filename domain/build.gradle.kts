@@ -2,12 +2,10 @@ plugins {
     id("java-library")
     id("org.jetbrains.kotlin.jvm")
 }
-
 repositories {
-    google()
     mavenCentral()
+    google()
 }
-
 java {
     sourceCompatibility = Options.compileOptions
     targetCompatibility = Options.compileOptions

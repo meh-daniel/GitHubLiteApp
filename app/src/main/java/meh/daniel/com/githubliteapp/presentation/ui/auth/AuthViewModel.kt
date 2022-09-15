@@ -12,12 +12,12 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.domain.repositories.SignRepository
+import meh.daniel.com.domain.repositories.SessionRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
 class AuthViewModel @Inject constructor(
-    private val signRepository: SignRepository
+    private val signRepository: SessionRepository
 ) : BaseViewModel(){
 
     sealed interface State {
@@ -47,10 +47,10 @@ class AuthViewModel @Inject constructor(
             val repo = signRepository.signIn(token = "Token ${_token.value}")
             if (!repo.successful){
                 sendAction(Action.ShowError(repo.errorMessage!!))
-            } else{
-                sendAction(Action.RouteToMain)
                 delay(7000L)
                 _state.value = State.Idle
+            } else{
+                sendAction(Action.RouteToMain)
             }
             _state.value = State.Idle
         }

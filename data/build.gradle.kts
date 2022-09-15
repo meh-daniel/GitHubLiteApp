@@ -2,12 +2,10 @@ plugins {
     id(Plugins.AGP.library)
     kotlin(Plugins.Kotlin.android)
 }
-
 repositories {
-    google()
     mavenCentral()
+    google()
 }
-
 android {
     compileSdk = Config.compileSdk
 
@@ -52,5 +50,9 @@ dependencies {
     implementation(Dependencies.Network.retrofit2Gson)
     implementation(Dependencies.Network.logging)
     // Android
-    implementation(Dependencies.Android.coreKtx)
+    testImplementation(Dependencies.Test.jUnit)
+    androidTestImplementation(Dependencies.Test.androidJUnit)
+    androidTestImplementation(Dependencies.Test.espresso)
+    androidTestImplementation(Dependencies.Test.mockitoCore)
+    androidTestImplementation(Dependencies.Test.mockitoKotlin)
 }

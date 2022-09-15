@@ -1,5 +1,4 @@
 object Plugins {
-
     object AGP {
         const val application = "com.android.application"
         const val library = "com.android.library"

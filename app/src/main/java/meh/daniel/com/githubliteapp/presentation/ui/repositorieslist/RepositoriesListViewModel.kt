@@ -7,13 +7,13 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import meh.daniel.com.domain.repositories.AppRepository
+import meh.daniel.com.domain.repositories.SessionRepository
 import meh.daniel.com.domain.model.repository.Repository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
 class RepositoriesListViewModel @Inject constructor(
-    private val repository: AppRepository
+    private val repository: SessionRepository
 ) : BaseViewModel() {
 
     private val _repositories: MutableLiveData<List<Repository>> = MutableLiveData()
