@@ -1,4 +1,4 @@
-package meh.daniel.com.domain.model.repository
+package meh.daniel.com.domain.model
 
 data class RepoDetails(
     val repositoryName: String,

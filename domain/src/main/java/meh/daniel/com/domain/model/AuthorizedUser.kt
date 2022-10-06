@@ -1,4 +1,4 @@
-package meh.daniel.com.domain.model.user
+package meh.daniel.com.domain.model
 
 data class AuthorizedUser(
     var authToken: String? = null,

@@ -1,15 +1,13 @@
 package meh.daniel.com.data
 
 import android.content.Context
-import android.util.Log
 import meh.daniel.com.data.nw.GitHubApi
-import meh.daniel.com.data.nw.modelNW.RepoDetailsNW
-import meh.daniel.com.domain.model.ValidationResult
-import meh.daniel.com.domain.model.repository.Repo
-import meh.daniel.com.domain.model.repository.RepoDetails
-import meh.daniel.com.domain.model.user.AuthorizedUser
+import meh.daniel.com.domain.utils.ValidationResult
+import meh.daniel.com.domain.model.Repo
+import meh.daniel.com.domain.model.RepoDetails
+import meh.daniel.com.domain.model.AuthorizedUser
 import meh.daniel.com.domain.SessionRepository
-import meh.daniel.com.domain.model.readme.Readme
+import meh.daniel.com.domain.model.Readme
 
 class SessionRepositoryImpl(
     private val context: Context,

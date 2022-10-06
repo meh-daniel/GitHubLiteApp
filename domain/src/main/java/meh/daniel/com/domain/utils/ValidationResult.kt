@@ -1,4 +1,4 @@
-package meh.daniel.com.domain.model
+package meh.daniel.com.domain.utils
 
 data class ValidationResult(
     val successful: Boolean,

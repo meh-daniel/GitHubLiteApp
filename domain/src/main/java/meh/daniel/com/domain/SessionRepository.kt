@@ -1,9 +1,9 @@
 package meh.daniel.com.domain
 
-import meh.daniel.com.domain.model.repository.Repo
-import meh.daniel.com.domain.model.repository.RepoDetails
-import meh.daniel.com.domain.model.ValidationResult
-import meh.daniel.com.domain.model.readme.Readme
+import meh.daniel.com.domain.model.Repo
+import meh.daniel.com.domain.model.RepoDetails
+import meh.daniel.com.domain.utils.ValidationResult
+import meh.daniel.com.domain.model.Readme
 
 interface SessionRepository {
     suspend fun getRepositories(): List<Repo>

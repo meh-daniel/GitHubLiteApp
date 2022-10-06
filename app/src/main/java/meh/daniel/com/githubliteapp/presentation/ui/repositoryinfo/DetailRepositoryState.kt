@@ -1,6 +1,6 @@
 package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
 
-import meh.daniel.com.domain.model.repository.RepoDetails
+import meh.daniel.com.domain.model.RepoDetails
 
 interface DetailRepositoryState {
 
