@@ -1,4 +1,4 @@
-package meh.daniel.com.domain.repositories
+package meh.daniel.com.domain
 
 import meh.daniel.com.domain.model.repository.Repo
 import meh.daniel.com.domain.model.repository.RepoDetails
@@ -9,5 +9,6 @@ interface SessionRepository {
     suspend fun getRepository(id: Int): RepoDetails
     suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): String
     suspend fun signIn(token: String): ValidationResult
+    suspend fun checkRegister(): Boolean
     suspend fun exitSession()
 }

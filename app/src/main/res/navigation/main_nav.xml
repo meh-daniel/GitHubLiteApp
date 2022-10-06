@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav"
-    app:startDestination="@id/authFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/authFragment"
@@ -18,5 +18,32 @@
         android:id="@+id/repositoriesListFragment"
         android:name="meh.daniel.com.githubliteapp.presentation.ui.repositorieslist.RepositoriesListFragment"
         android:label="repositorieslist_fragment"
-        tools:layout="@layout/fragment_repositorieslist" />
+        tools:layout="@layout/fragment_repositorieslist" >
+        <action
+            android:id="@+id/action_repositoriesListFragment_to_detailInfoFragment"
+            app:destination="@id/detailInfoFragment" />
+        <action
+            android:id="@+id/action_repositoriesListFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.ui.splash.SplashFragment"
+        android:label="SplashFragment" >
+        <action
+            android:id="@+id/action_splashFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_repositoriesListFragment"
+            app:destination="@id/repositoriesListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailInfoFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo.DetailInfoFragment"
+        android:label="fragment_repositoryinfo"
+        tools:layout="@layout/fragment_repositoryinfo" >
+        <action
+            android:id="@+id/action_detailInfoFragment_to_authFragment"
+            app:destination="@id/authFragment" />
+    </fragment>
 </navigation>

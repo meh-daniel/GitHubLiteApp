@@ -12,7 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import meh.daniel.com.domain.repositories.SessionRepository
+import meh.daniel.com.domain.SessionRepository
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel

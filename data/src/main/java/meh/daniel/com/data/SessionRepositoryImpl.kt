@@ -1,13 +1,12 @@
-package meh.daniel.com.data.repositories
+package meh.daniel.com.data
 
 import android.content.Context
 import meh.daniel.com.data.nw.GitHubApi
-import meh.daniel.com.data.toDomain
 import meh.daniel.com.domain.model.ValidationResult
 import meh.daniel.com.domain.model.repository.Repo
 import meh.daniel.com.domain.model.repository.RepoDetails
 import meh.daniel.com.domain.model.user.AuthorizedUser
-import meh.daniel.com.domain.repositories.SessionRepository
+import meh.daniel.com.domain.SessionRepository
 
 class SessionRepositoryImpl(
     private val context: Context,
@@ -78,6 +77,10 @@ class SessionRepositoryImpl(
                 errorMessage = "${e.message}"
             )
         }
+    }
+
+    override suspend fun checkRegister(): Boolean {
+        return getLogin().username!!.isNotEmpty()
     }
 
     override suspend fun exitSession() {

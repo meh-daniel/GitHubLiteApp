@@ -8,9 +8,9 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Named
 import javax.inject.Singleton
-import meh.daniel.com.data.repositories.SessionRepositoryImpl
+import meh.daniel.com.data.SessionRepositoryImpl
 import meh.daniel.com.data.nw.GitHubApi
-import meh.daniel.com.domain.repositories.SessionRepository
+import meh.daniel.com.domain.SessionRepository
 
 @Module
 @InstallIn(SingletonComponent::class)
