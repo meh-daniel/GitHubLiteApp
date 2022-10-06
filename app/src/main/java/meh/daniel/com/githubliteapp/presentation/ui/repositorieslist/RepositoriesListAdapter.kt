@@ -10,9 +10,11 @@ import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.ItemRepositoryBinding
 import meh.daniel.com.domain.model.repository.Repo
 
-class RepositoryAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepositoryDiffUtil()) {
+class RepositoryAdapter(
+    private val onClickRepo: (id: Int) -> Unit
+) : ListAdapter<Repo, RecyclerView.ViewHolder>(RepositoryDiffUtil()) {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when(viewType){
-        R.layout.item_repository -> RepositoryViewHolder.from(parent)
+        R.layout.item_repository -> RepositoryViewHolder.from(parent, onClickRepo)
         else ->  throw Throwable("onCreateViewHolder exception - unknown view type by name: $viewType")
     }
 
@@ -27,7 +29,7 @@ class RepositoryAdapter : ListAdapter<Repo, RecyclerView.ViewHolder>(RepositoryD
     }
 }
 
-class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : RecyclerView.ViewHolder(binding.root){
+class RepositoryViewHolder(private val binding: ItemRepositoryBinding, private val onClickRepo: (id: Int) -> Unit) : RecyclerView.ViewHolder(binding.root){
     fun bind(item: Repo){
         binding.nameRepositoryTxt.text = item.name
         binding.programmingLanguageTxt.text = item.language
@@ -37,11 +39,17 @@ class RepositoryViewHolder(private val binding: ItemRepositoryBinding) : Recycle
         }
     }
 
+    private fun onClick(item: Repo) {
+        binding.root.setOnClickListener {
+            onClickRepo(item.id)
+        }
+    }
+
     companion object {
-        fun from(parent: ViewGroup): RecyclerView.ViewHolder {
+        fun from(parent: ViewGroup, onClickRepo: (id: Int) -> Unit): RecyclerView.ViewHolder {
             val layoutInflater = LayoutInflater.from(parent.context)
             val binding = ItemRepositoryBinding.inflate(layoutInflater, parent, false)
-            return RepositoryViewHolder(binding)
+            return RepositoryViewHolder(binding, onClickRepo)
         }
     }
 }

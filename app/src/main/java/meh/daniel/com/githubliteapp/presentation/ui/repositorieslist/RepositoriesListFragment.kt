@@ -1,19 +1,25 @@
 package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentRepositorieslistBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
 
+private const val ID_REPO = "id_repo"
+
 @AndroidEntryPoint
 class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, FragmentRepositorieslistBinding>(R.layout.fragment_repositorieslist){
 
     override val viewModel: RepositoriesListViewModel by viewModels()
-    private val repositoryAdapter = RepositoryAdapter()
+    private val repositoryAdapter = RepositoryAdapter(
+        onClickRepo = { routeToDetails(it) }
+    )
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -21,14 +27,18 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
     ) = FragmentRepositorieslistBinding.inflate(inflater, container, false)
 
     override fun initialize() {
-        super.initialize()
         initRecyclerView()
+    }
+
+    override fun setupSubscribers() {
         observableViewModel()
     }
 
     private fun observableViewModel() {
-        viewModel.repositories.observe(this@RepositoriesListFragment) {
-            repositoryAdapter.submitList(it)
+        viewModel.state.observe(this) { state ->
+            with(binding){
+                if(state is RepositoriesListViewModel.State.Loaded) repositoryAdapter.submitList(state.repos)
+            }
         }
     }
 
@@ -40,6 +50,12 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
                 LinearLayoutManager.VERTICAL,
                 false
             )
+    }
+
+    private fun routeToDetails(id: Int){
+        val bundle = Bundle()
+        bundle.putString(ID_REPO, id.toString())
+        findNavController().navigate(R.id.action_repositoriesListFragment_to_detailInfoFragment, bundle)
     }
 
 }

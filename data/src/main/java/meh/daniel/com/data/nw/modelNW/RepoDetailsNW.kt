@@ -3,7 +3,7 @@ package meh.daniel.com.data.nw.modelNW
 
 import com.google.gson.annotations.SerializedName
 
-data class RepositoryNW(
+data class RepoDetailsNW(
     @SerializedName("allow_forking")
     val allowForking: Boolean,
     @SerializedName("archive_url")
@@ -37,7 +37,7 @@ data class RepositoryNW(
     @SerializedName("deployments_url")
     val deploymentsUrl: String,
     @SerializedName("description")
-    val description: String?,
+    val description: Any?,
     @SerializedName("disabled")
     val disabled: Boolean,
     @SerializedName("downloads_url")
@@ -73,7 +73,7 @@ data class RepositoryNW(
     @SerializedName("has_wiki")
     val hasWiki: Boolean,
     @SerializedName("homepage")
-    val homepage: String?,
+    val homepage: Any?,
     @SerializedName("hooks_url")
     val hooksUrl: String,
     @SerializedName("html_url")
@@ -93,7 +93,7 @@ data class RepositoryNW(
     @SerializedName("labels_url")
     val labelsUrl: String,
     @SerializedName("language")
-    val language: String?,
+    val language: String,
     @SerializedName("languages_url")
     val languagesUrl: String,
     @SerializedName("license")
@@ -106,6 +106,8 @@ data class RepositoryNW(
     val mirrorUrl: Any?,
     @SerializedName("name")
     val name: String,
+    @SerializedName("network_count")
+    val networkCount: Int,
     @SerializedName("node_id")
     val nodeId: String,
     @SerializedName("notifications_url")
@@ -134,6 +136,8 @@ data class RepositoryNW(
     val stargazersUrl: String,
     @SerializedName("statuses_url")
     val statusesUrl: String,
+    @SerializedName("subscribers_count")
+    val subscribersCount: Int,
     @SerializedName("subscribers_url")
     val subscribersUrl: String,
     @SerializedName("subscription_url")
@@ -144,6 +148,8 @@ data class RepositoryNW(
     val tagsUrl: String,
     @SerializedName("teams_url")
     val teamsUrl: String,
+    @SerializedName("temp_clone_token")
+    val tempCloneToken: Any?,
     @SerializedName("topics")
     val topics: List<Any>,
     @SerializedName("trees_url")

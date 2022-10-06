@@ -1,12 +1,15 @@
 package meh.daniel.com.data
 
 import android.content.Context
+import android.util.Log
 import meh.daniel.com.data.nw.GitHubApi
+import meh.daniel.com.data.nw.modelNW.RepoDetailsNW
 import meh.daniel.com.domain.model.ValidationResult
 import meh.daniel.com.domain.model.repository.Repo
 import meh.daniel.com.domain.model.repository.RepoDetails
 import meh.daniel.com.domain.model.user.AuthorizedUser
 import meh.daniel.com.domain.SessionRepository
+import meh.daniel.com.domain.model.readme.Readme
 
 class SessionRepositoryImpl(
     private val context: Context,
@@ -24,22 +27,14 @@ class SessionRepositoryImpl(
     }
 
     override suspend fun getRepositories(): List<Repo> {
-        return try {
-             gitHubApi.getRepositories("${getLogin().authToken}").toDomain()
-        } catch (e : Throwable) {
-             throw Throwable("myError ${e.message.orEmpty()}")
-        }
+        return gitHubApi.getRepositories(getLogin().authToken!!).toDomain()
     }
 
     override suspend fun getRepository(id: Int): RepoDetails {
-        return try {
-            gitHubApi.getRepositoryById(id).toDomain()
-        } catch (e : Throwable){
-            throw Throwable("myError ${e.message.orEmpty()}")
-        }
+        return gitHubApi.getRepositoryById(id).toDomain()
     }
 
-    override suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): String {
+    override suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): Readme {
         return gitHubApi.getRepositoryReadme(
             ownerName = ownerName,
             repositoryName = repositoryName,
@@ -54,11 +49,11 @@ class SessionRepositoryImpl(
                     errorMessage = "This is variant token is not search"
                 )
             }
-            else if(gitHubApi.getUserByToken(token).toDomain().name.isNotEmpty()){
+            else if(gitHubApi.getUserByToken("Token $token").toDomain().name.isNotEmpty()){
                 setupSign(
                     storage = AuthorizedUser(
                         authToken = token,
-                        username = gitHubApi.getUserByToken(token).toDomain().name
+                        username = gitHubApi.getUserByToken("Token $token").toDomain().name
                     )
                 )
                 ValidationResult(
@@ -80,7 +75,7 @@ class SessionRepositoryImpl(
     }
 
     override suspend fun checkRegister(): Boolean {
-        return getLogin().username!!.isNotEmpty()
+        return getLogin().authToken.isNullOrEmpty()
     }
 
     override suspend fun exitSession() {
@@ -93,7 +88,7 @@ class SessionRepositoryImpl(
     private fun setupSign(storage: AuthorizedUser){
         sessionPreferences
             .edit()
-            .putString(AUTH_TOKEN, storage.authToken)
+            .putString(AUTH_TOKEN, "Token ${storage.authToken}")
             .putString(USERNAME, storage.username)
             .apply()
     }

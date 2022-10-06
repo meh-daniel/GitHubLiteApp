@@ -16,8 +16,8 @@ class RepositoriesListViewModel @Inject constructor(
     private val repository: SessionRepository
 ) : BaseViewModel() {
 
-    private val _repositories: MutableLiveData<List<Repo>> = MutableLiveData()
-    var repositories: LiveData<List<Repo>> = _repositories
+    private val _state = MutableLiveData<State>(State.Loading)
+    var state: LiveData<State> = _state
 
     init {
         loadRepositories()
@@ -25,12 +25,15 @@ class RepositoriesListViewModel @Inject constructor(
 
     private fun loadRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
-            try {
-                val repositories = repository.getRepositories()
-                _repositories.postValue(repositories)
-            } catch (e : Throwable) {
-
+            if (_state.value is State.Loading){
+                setState(State.Loaded(repository.getRepositories()))
             }
+        }
+    }
+
+    private fun setState(state: State) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _state.value = state
         }
     }
 
@@ -40,5 +43,4 @@ class RepositoriesListViewModel @Inject constructor(
         data class Error(val error: String) : State
         object Empty : State
     }
-
 }

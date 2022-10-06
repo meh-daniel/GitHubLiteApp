@@ -1,6 +1,7 @@
 package meh.daniel.com.data.nw
 
-import meh.daniel.com.data.nw.modelNW.RepositoriesNW
+import meh.daniel.com.data.nw.modelNW.RepoDetailsNW
+import meh.daniel.com.data.nw.modelNW.RepositoryNW
 import meh.daniel.com.data.nw.modelNW.RepositoryReadmeNW
 import meh.daniel.com.data.nw.modelNW.UserInfoNW
 import retrofit2.http.GET
@@ -13,12 +14,12 @@ interface GitHubApi {
     @GET("user/repos")
     suspend fun getRepositories(
         @Header("Authorization") token: String
-    ) : List<RepositoriesNW>
+    ) : List<RepositoryNW>
 
     @GET("repositories/{id}")
     suspend fun getRepositoryById(
         @Path("id") id: Int
-    ) : RepositoriesNW
+    ) : RepoDetailsNW
 
     @GET("repos/{userName}/{repositoryName}/contents/README.md")
     suspend fun getRepositoryReadme(

@@ -30,7 +30,7 @@ class SplashViewModel @Inject constructor(
     private fun checkOfSign() {
         viewModelScope.launch(Dispatchers.IO) {
             val check = repository.checkRegister()
-            if (check) setAction(Action.routeToRepositoryList) else setAction(Action.routeToAuth)
+            if (check) setAction(Action.routeToAuth) else setAction(Action.routeToRepositoryList)
         }
     }
 

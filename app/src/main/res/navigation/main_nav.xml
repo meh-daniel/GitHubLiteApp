@@ -39,9 +39,12 @@
     </fragment>
     <fragment
         android:id="@+id/detailInfoFragment"
-        android:name="meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo.DetailInfoFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo.DetailRepositoryFragment"
         android:label="fragment_repositoryinfo"
-        tools:layout="@layout/fragment_repositoryinfo" >
+        tools:layout="@layout/fragment_detailrepository" >
+        <argument
+            android:name="id_repo"
+            app:argType="string" />
         <action
             android:id="@+id/action_detailInfoFragment_to_authFragment"
             app:destination="@id/authFragment" />

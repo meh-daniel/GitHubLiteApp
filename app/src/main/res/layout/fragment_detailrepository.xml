@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/black"
-    tools:context=".presentation.ui.repositoryinfo.DetailInfoFragment">
+    tools:context=".presentation.ui.repositoryinfo.DetailRepositoryFragment">
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/urlRepositoryTxt"

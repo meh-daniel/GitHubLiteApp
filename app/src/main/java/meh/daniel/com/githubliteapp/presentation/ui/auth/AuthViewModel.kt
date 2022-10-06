@@ -44,7 +44,7 @@ class AuthViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO){
             _state.value = State.Loading
             delay(2000L)
-            val repo = signRepository.signIn(token = "Token ${_token.value}")
+            val repo = signRepository.signIn(token = _token.value)
             if (!repo.successful){
                 sendAction(Action.ShowError(repo.errorMessage!!))
                 delay(7000L)
