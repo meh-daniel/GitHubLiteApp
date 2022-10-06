@@ -32,7 +32,7 @@ internal fun RepositoryReadmeNW.toDomain(): Readme {
 
 internal fun RepoDetailsNW.toDomain(): RepoDetails {
     return RepoDetails(
-        repositoryName = name,
+        name = name,
         branchName = defaultBranch,
         url = url,
         stars = stargazersCount,

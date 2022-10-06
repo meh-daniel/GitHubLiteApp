@@ -1,7 +1,7 @@
 package meh.daniel.com.domain.model
 
 data class RepoDetails(
-    val repositoryName: String,
+    val name: String,
     val branchName: String,
     val url: String,
     val stars: Int,

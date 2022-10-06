@@ -20,51 +20,40 @@ class AuthViewModel @Inject constructor(
     private val signRepository: SessionRepository
 ) : BaseViewModel(){
 
-    sealed interface State {
-        object Idle : State
-        object Loading : State
-        data class InvalidInput(val reason: String) : State
-    }
+    private val _action: Channel<AuthAction> = Channel(Channel.BUFFERED)
+    var actionFlow: Flow<AuthAction> = _action.receiveAsFlow()
 
-    sealed interface Action {
-        data class ShowError(val message: String) : Action
-        object RouteToMain : Action
-    }
-
-    private val _action: Channel<Action> = Channel(Channel.BUFFERED)
-    var actionFlow: Flow<Action> = _action.receiveAsFlow()
-
-    private val _state = MutableStateFlow<State>(State.Idle)
-    val stateFlow: Flow<State> = _state.asStateFlow()
+    private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
+    val stateFlow: Flow<AuthState> = _state.asStateFlow()
 
     private val _token = MutableStateFlow("")
     val token : StateFlow<String> = _token.asStateFlow()
 
     fun onSignButtonPressed() {
         viewModelScope.launch(Dispatchers.IO){
-            _state.value = State.Loading
-            delay(2000L)
+            setState(AuthState.Loading)
             val repo = signRepository.signIn(token = _token.value)
             if (!repo.successful){
-                sendAction(Action.ShowError(repo.errorMessage!!))
-                delay(7000L)
-                _state.value = State.Idle
+                sendAction(AuthAction.ShowError(repo.errorMessage!!))
+                setState(AuthState.Idle)
             } else{
-                sendAction(Action.RouteToMain)
+                sendAction(AuthAction.RouteToMain)
             }
-            _state.value = State.Idle
+            setState(AuthState.Idle)
         }
-    }
-
-    fun showError(message: String) {
-        _state.value = State.InvalidInput(reason = message)
     }
 
     fun setToken(token: String){
         _token.value = token
     }
 
-    private fun sendAction(action: Action){
+    private fun setState(state: AuthState) {
+        viewModelScope.launch(Dispatchers.Main) {
+            _state.value = state
+        }
+    }
+
+    private fun sendAction(action: AuthAction){
         viewModelScope.launch(Dispatchers.Main){
             _action.send(action)
         }

@@ -24,12 +24,12 @@ class SplashFragment: BaseFragment<SplashViewModel, FragmentSplashBinding>(R.lay
     }
 
     private fun observe() {
-        viewModel.action.observe(this) { action ->
+        viewModel.splashAction.observe(this) { action ->
             when(action) {
-                is SplashViewModel.Action.routeToAuth -> {
+                is SplashAction.RouteToAuth -> {
                     findNavController().navigate(R.id.action_splashFragment_to_authFragment)
                 }
-                is SplashViewModel.Action.routeToRepositoryList -> {
+                is SplashAction.RouteToRepositoryList -> {
                     findNavController().navigate(R.id.action_splashFragment_to_repositoriesListFragment)
                 }
             }

@@ -72,8 +72,12 @@ class SessionRepositoryImpl(
         }
     }
 
-    override suspend fun checkRegister(): Boolean {
-        return getLogin().authToken.isNullOrEmpty()
+    override suspend fun checkRegister(): ValidationResult {
+        return if(getLogin().authToken.isNullOrEmpty()){
+            ValidationResult(true)
+        } else{
+            ValidationResult(false)
+        }
     }
 
     override suspend fun exitSession() {

@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentAuthBinding
@@ -32,7 +29,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     override fun setupSubscribers() {
         setupSubscriberState()
         setupSubscriberAction()
-        setupObservableEditText()
+        setupSubscriberEditText()
     }
 
     private fun initButtonSignIn() {
@@ -42,7 +39,7 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
         }
     }
 
-    private fun setupObservableEditText(){
+    private fun setupSubscriberEditText(){
         viewModel.token.onEach { token ->
             binding.tokenEdTxt.setText(token)
         }.observeInLifecycle(viewLifecycleOwner)
@@ -51,11 +48,11 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun setupSubscriberAction() {
         viewModel.actionFlow.onEach { action ->
             when(action) {
-                is AuthViewModel.Action.RouteToMain -> {
+                is AuthAction.RouteToMain -> {
                     findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
                 }
-                is AuthViewModel.Action.ShowError -> {
-                    viewModel.showError(action.message)
+                is AuthAction.ShowError -> {
+                    //TODO: тут нужно реализовать показ ошибки в самом editText
                 }
             }
         }.observeInLifecycle(viewLifecycleOwner)
@@ -64,10 +61,10 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun setupSubscriberState(){
         viewModel.stateFlow.onEach { state ->
             with(binding){
-                signInBtn.text = if(state is AuthViewModel.State.Loading) "" else getText(R.string.sign_in)
-                progressBarOfButton.visibility = if(state is AuthViewModel.State.Loading) View.VISIBLE else View.INVISIBLE
-                errorTxt.visibility = if(state is AuthViewModel.State.InvalidInput) View.VISIBLE else View.INVISIBLE
-                errorTxt.text = if(state is AuthViewModel.State.InvalidInput) state.reason else ""
+                signInBtn.text = if(state is AuthState.Loading) "" else getText(R.string.sign_in)
+                progressBarOfButton.visibility = if(state is AuthState.Loading) View.VISIBLE else View.INVISIBLE
+                errorTxt.visibility = if(state is AuthState.InvalidInput) View.VISIBLE else View.INVISIBLE
+                errorTxt.text = if(state is AuthState.InvalidInput) state.reason else ""
             }
         }.observeInLifecycle(viewLifecycleOwner)
     }

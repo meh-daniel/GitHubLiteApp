@@ -15,13 +15,8 @@ class SplashViewModel @Inject constructor(
     private val repository: SessionRepository
 ): BaseViewModel() {
 
-    interface Action {
-        object routeToAuth: Action
-        object routeToRepositoryList: Action
-    }
-
-    private val _action = MutableLiveData<Action>()
-    val action: LiveData<Action> = _action
+    private val _splashAction = MutableLiveData<SplashAction>()
+    val splashAction: LiveData<SplashAction> = _splashAction
 
     init {
         checkOfSign()
@@ -29,14 +24,13 @@ class SplashViewModel @Inject constructor(
 
     private fun checkOfSign() {
         viewModelScope.launch(Dispatchers.IO) {
-            val check = repository.checkRegister()
-            if (check) setAction(Action.routeToAuth) else setAction(Action.routeToRepositoryList)
+            if (repository.checkRegister().successful) setAction(SplashAction.RouteToAuth) else setAction(SplashAction.RouteToRepositoryList)
         }
     }
 
-    private fun setAction(state: Action) {
+    private fun setAction(state: SplashAction) {
         viewModelScope.launch(Dispatchers.Main) {
-            _action.value = state
+            _splashAction.value = state
         }
     }
 

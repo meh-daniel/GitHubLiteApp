@@ -10,6 +10,6 @@ interface SessionRepository {
     suspend fun getRepository(id: Int): RepoDetails
     suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): Readme
     suspend fun signIn(token: String): ValidationResult
-    suspend fun checkRegister(): Boolean
+    suspend fun checkRegister(): ValidationResult
     suspend fun exitSession()
 }
