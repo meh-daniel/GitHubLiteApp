@@ -1,16 +1,11 @@
 plugins {
-    id(Plugins.AGP.application)
-    id(Plugins.Hilt.plugin)
-    kotlin(Plugins.Kotlin.android)
-    kotlin(Plugins.Kotlin.kapt)
-}
-repositories {
-    mavenCentral()
-    google()
+    id(Plugins.AGP.APPLICATION)
+    id(Plugins.HILT)
+    kotlin(Plugins.Kotlin.ANDROID)
+    kotlin(Plugins.Kotlin.KAPT)
 }
 android {
     compileSdk = Config.compileSdk
-
     defaultConfig {
         applicationId = Config.packageName
         minSdk =  Config.minSDK
@@ -30,19 +25,13 @@ android {
             )
         }
     }
-
     compileOptions {
-        sourceCompatibility = Options.compileOptions
-        targetCompatibility = Options.compileOptions
+        sourceCompatibility = Config.Options.compileOptions
+        targetCompatibility = Config.Options.compileOptions
     }
-
     kotlinOptions {
-        jvmTarget = Options.kotlinOptions
-
-        // без данного параметра viewModel не инициализировалась с помощью фабрики
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
+        jvmTarget = Config.Options.kotlinOptions
     }
-
     kapt {
         arguments {
             arg("room.schemaLocation", "$projectDir/schemas",)
@@ -50,63 +39,40 @@ android {
             arg("room.expandProjection", "true")
         }
     }
-
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
-
     buildFeatures.viewBinding = true
 }
-
 dependencies {
-
-    implementation(project(":data"))
-    implementation(project(":domain"))
-
-    // Network
-    implementation(Dependencies.Network.retrofit2)
-    implementation(Dependencies.Network.retrofit2Gson)
-    implementation(Dependencies.Network.logging)
-
-    //
-    implementation(Dependencies.DataStore.store)
-
-    // Hilt
-    implementation(Dependencies.Hilt.android)
-    kapt(Dependencies.Hilt.compiler)
-
-    // Lifecycle
-    implementation(Dependencies.Lifecycle.viewmodel)
-    implementation(Dependencies.Lifecycle.livedata)
-    implementation(Dependencies.Lifecycle.runtime)
-
-    // Navigation
-    implementation(Dependencies.Navigation.fragment)
-    implementation(Dependencies.Navigation.ui)
-
-    // Coroutines
-    implementation(Dependencies.Coroutines.core)
-    implementation(Dependencies.Coroutines.android)
-
-    // UI
-    implementation(Dependencies.UI.constraintLayout)
-    implementation(Dependencies.UI.recyclerView)
-    implementation(Dependencies.UI.progressbar)
-    implementation(Dependencies.UI.fragmentKtx)
-    implementation(Dependencies.UI.activityKtx)
-
-    // Android
-    implementation(Dependencies.Android.coreKtx)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.appCompatResources)
-    implementation(Dependencies.Android.material)
-
-    // Test
-    testImplementation(Dependencies.Test.jUnit)
-    androidTestImplementation(Dependencies.Test.androidJUnit)
-    androidTestImplementation(Dependencies.Test.espresso)
-    androidTestImplementation(Dependencies.Test.mockitoCore)
-    androidTestImplementation(Dependencies.Test.mockitoKotlin)
+    implementation(project(Modules.Features.DATA))
+    implementation(project(Modules.Features.DOMAIN))
+    implementation(Deps.Network.RETROFIT2)
+    implementation(Deps.Network.RETROFIT2_GSON)
+    implementation(Deps.Network.LOGGING_INERCEPTOR)
+    implementation(Deps.Network.MARKWON)
+    implementation(Deps.Hilt.ANDROID)
+    implementation(Deps.Room.KTX)
+    implementation(Deps.Room.RUNTIME)
+    kapt(Deps.Room.COMPILER)
+    kapt(Deps.Hilt.COMPILER)
+    implementation(Deps.Lifecycle.VIEW_MODEL)
+    implementation(Deps.Lifecycle.LIVE_DATA)
+    implementation(Deps.Lifecycle.RUNTIME)
+    implementation(Deps.Navigation.FRAGMENT)
+    implementation(Deps.Navigation.UI)
+    implementation(Deps.Coroutines.CORE)
+    implementation(Deps.Coroutines.ANDROID)
+    implementation(Deps.UI.CONSTRAINT_LAYOUT)
+    implementation(Deps.UI.RECYCLER_VIEW)
+    implementation(Deps.UI.PROGRESS_BAR)
+    implementation(Deps.UI.FRAGMENT_KTX)
+    implementation(Deps.UI.ACTIVITY_KTX)
+    implementation(Deps.ImageLoad.GLIDE)
+    implementation(Deps.ImageLoad.GLIDE_COMPILER)
+    implementation(Deps.Android.CORE_KTX)
+    implementation(Deps.Android.APPCOMPAT)
+    implementation(Deps.Android.MATERIAL)
+    testImplementation(Deps.Test.JUNIT)
+    androidTestImplementation(Deps.Test.ANDROID_JUNIT)
+    androidTestImplementation(Deps.Test.ESPRESSO)
+    androidTestImplementation(Deps.Test.MOCKITO_CORE)
+    androidTestImplementation(Deps.Test.MOCKITO_KOTLIN)
 }

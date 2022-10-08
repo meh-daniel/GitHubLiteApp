@@ -37,6 +37,7 @@ class RepositoryViewHolder(private val binding: ItemRepositoryBinding, private v
             binding.repositoryDescription.visibility = View.VISIBLE
             binding.repositoryDescription.text = item.description
         }
+        onClick(item)
     }
 
     private fun onClick(item: Repo) {

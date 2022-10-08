@@ -1,37 +1,30 @@
 plugins {
-    id(Plugins.AGP.library)
-    kotlin(Plugins.Kotlin.android)
-}
-repositories {
-    mavenCentral()
-    google()
+    id(Plugins.AGP.LIBRARY)
+    kotlin(Plugins.Kotlin.ANDROID)
+    kotlin(Plugins.Kotlin.KAPT)
 }
 android {
     compileSdk = Config.compileSdk
-
     defaultConfig {
+        proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         minSdk =  Config.minSDK
         targetSdk = Config.targetSDK
-    }
-    buildTypes {
-        getByName(Config.release) {
-            isMinifyEnabled = true
-            proguardFiles(
-                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
-            )
-            buildConfigField("String", "BASE_URL", "\"https://example.com/\"")
-        }
-
-        getByName(Config.debug) {
-            buildConfigField("String", "BASE_URL", "\"https://example.com.debug/\"")
-        }
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
     compileOptions {
-        sourceCompatibility = Options.compileOptions
-        targetCompatibility = Options.compileOptions
+        sourceCompatibility = Config.Options.compileOptions
+        targetCompatibility = Config.Options.compileOptions
     }
     kotlinOptions {
-        jvmTarget = Options.kotlinOptions
+        jvmTarget = Config.Options.kotlinOptions
+    }
+    kapt {
+        arguments {
+            arg("room.schemaLocation", "$projectDir/schemas",)
+            arg("room.incremental", "true")
+            arg("room.expandProjection", "true")
+        }
     }
     packagingOptions {
         resources {
@@ -39,23 +32,22 @@ android {
         }
     }
 }
-
 dependencies {
-    implementation(project(":domain"))
-    // inject
-    implementation(Dependencies.Javax.inject)
-    implementation(Dependencies.Hilt.android)
-    // Coroutines
-    implementation(Dependencies.Coroutines.core)
-    implementation(Dependencies.Coroutines.android)
-    // Network
-    implementation(Dependencies.Network.retrofit2)
-    implementation(Dependencies.Network.retrofit2Gson)
-    implementation(Dependencies.Network.logging)
-    // Android
-    testImplementation(Dependencies.Test.jUnit)
-    androidTestImplementation(Dependencies.Test.androidJUnit)
-    androidTestImplementation(Dependencies.Test.espresso)
-    androidTestImplementation(Dependencies.Test.mockitoCore)
-    androidTestImplementation(Dependencies.Test.mockitoKotlin)
+    implementation(project(Modules.Features.DOMAIN))
+    implementation(Deps.Coroutines.CORE)
+    implementation(Deps.Coroutines.ANDROID)
+    implementation(Deps.Javax.INJECT)
+    implementation(Deps.Room.KTX)
+    implementation(Deps.Room.RUNTIME)
+    kapt(Deps.Room.COMPILER)
+    implementation(Deps.Network.RETROFIT2)
+    implementation(Deps.Network.RETROFIT2_GSON)
+    implementation(Deps.Network.LOGGING_INERCEPTOR)
+    implementation(Deps.Android.CORE_KTX)
+    implementation(Deps.Android.APPCOMPAT)
+    testImplementation(Deps.Test.JUNIT)
+    androidTestImplementation(Deps.Test.ANDROID_JUNIT)
+    androidTestImplementation(Deps.Test.ESPRESSO)
+    androidTestImplementation(Deps.Test.MOCKITO_CORE)
+    androidTestImplementation(Deps.Test.MOCKITO_KOTLIN)
 }

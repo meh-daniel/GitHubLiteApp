@@ -37,7 +37,7 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
     private fun observableViewModel() {
         viewModel.state.observe(this) { state ->
             with(binding){
-                if(state is RepositoriesListViewModel.State.Loaded) repositoryAdapter.submitList(state.repos)
+                if(state is RepositoriesListState.Loaded) repositoryAdapter.submitList(state.repos)
             }
         }
     }

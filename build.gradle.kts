@@ -1,10 +1,16 @@
-//plugins {
-//    id(Plugins.AGP.application) apply false
-//    id(Plugins.AGP.library)  apply false
-//    kotlin(Plugins.Kotlin.android)  apply false
-//
-//    // Navigation Safe Args
-//    id(Plugins.Navigation.safeArgs)  apply false
-//    // Hilt
-//    id(Plugins.Hilt.plugin) apply false
-//}
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+
+    dependencies {
+        classpath(Plugins.Gradle.ANDROID)
+        classpath(Plugins.Gradle.KOTLIN)
+        classpath(Plugins.Gradle.HILT)
+    }
+}
+
+tasks.register("clean", Delete::class) {
+    delete(rootProject.buildDir)
+}

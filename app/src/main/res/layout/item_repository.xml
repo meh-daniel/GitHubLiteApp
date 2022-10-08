@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black"
+    android:background="#0D1117"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -10,19 +11,23 @@
         android:id="@+id/nameRepositoryTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginStart="@dimen/margin16"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="21dp"
+        android:textColor="#58A6FF"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
-        tools:text="GitHubLiteApp"
-        style="@style/itemNameRepositoryTxt"/>
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="GitHubLiteApp" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/programmingLanguageTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin8"
-        android:layout_marginEnd="@dimen/margin16"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/roboto_medium"
+        android:textSize="12sp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="kotlin"
@@ -32,11 +37,13 @@
         android:id="@+id/repositoryDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/margin4"
-        android:layout_marginHorizontal="@dimen/margin16"
-        app:layout_constraintTop_toBottomOf="@+id/nameRepositoryTxt"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="16dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/nameRepositoryTxt"
         tools:text="eeeeeeeehhhhhhhoooooooooooyyyyyyyyyyyyyyy"
         tools:visibility="visible"
         style="@style/itemRepositoryDescriptionTxt"/>

@@ -63,8 +63,8 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
             with(binding){
                 signInBtn.text = if(state is AuthState.Loading) "" else getText(R.string.sign_in)
                 progressBarOfButton.visibility = if(state is AuthState.Loading) View.VISIBLE else View.INVISIBLE
-                errorTxt.visibility = if(state is AuthState.InvalidInput) View.VISIBLE else View.INVISIBLE
-                errorTxt.text = if(state is AuthState.InvalidInput) state.reason else ""
+                signInBtn.visibility = if(state is AuthState.Loading) View.GONE else View.VISIBLE
+
             }
         }.observeInLifecycle(viewLifecycleOwner)
     }

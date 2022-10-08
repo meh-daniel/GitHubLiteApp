@@ -1,24 +1,12 @@
 plugins {
-    id("java-library")
-    id("org.jetbrains.kotlin.jvm")
-}
-repositories {
-    mavenCentral()
-    google()
+    id(Plugins.JAVA)
+    id(Plugins.JVM)
 }
 java {
-    sourceCompatibility = Options.compileOptions
-    targetCompatibility = Options.compileOptions
+    sourceCompatibility = Config.Options.compileOptions
+    targetCompatibility = Config.Options.compileOptions
 }
-
 dependencies {
-
-    // Javax Inject
-    implementation(Dependencies.Javax.inject)
-
-    // Kotlin
-    implementation(Dependencies.Coroutines.core)
-
-    // Paging
-    implementation(Dependencies.Paging.common)
+    implementation(Deps.Coroutines.CORE)
+    implementation(Deps.Javax.INJECT)
 }

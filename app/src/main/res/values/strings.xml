@@ -2,4 +2,5 @@
     <string name="app_name">GitHubLiteApp</string>
     <string name="sign_in">SIGN IN</string>
     <string name="personal_assess_token">Personal assess token</string>
+    <string name="licence">Licence</string>
 </resources>
