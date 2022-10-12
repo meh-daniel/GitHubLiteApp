@@ -24,8 +24,7 @@ class SplashViewModel @Inject constructor(
 
     private fun checkOfSign() {
         viewModelScope.launch(Dispatchers.IO) {
-//            if (repository.checkRegister().successful) setAction(SplashAction.RouteToAuth) else setAction(SplashAction.RouteToRepositoryList)
-            setAction(SplashAction.RouteToAuth)
+            if (repository.checkRegister().successful) setAction(SplashAction.RouteToAuth) else setAction(SplashAction.RouteToRepositoryList)
         }
     }
 

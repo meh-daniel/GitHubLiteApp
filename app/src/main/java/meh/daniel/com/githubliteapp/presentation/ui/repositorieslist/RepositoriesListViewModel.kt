@@ -4,6 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.net.ConnectException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -23,10 +24,21 @@ class RepositoriesListViewModel @Inject constructor(
         loadRepositories()
     }
 
-    private fun loadRepositories() {
+    fun loadRepositories() {
         viewModelScope.launch(Dispatchers.IO) {
-            if (_state.value is RepositoriesListState.Loading){
-                setState(RepositoriesListState.Loaded(repository.getRepositories()))
+            setState(RepositoriesListState.Loading)
+            try {
+                val repos = repository.getRepositories()
+                if(repos.isEmpty()) {
+                    setState(RepositoriesListState.Empty)
+                } else {
+                    setState(RepositoriesListState.Loaded(repos))
+                }
+            } catch (e: Throwable) {
+                when (e) {
+                    is ConnectException -> setState(RepositoriesListState.Error(e.message.toString(), false))
+                    else -> setState(RepositoriesListState.Error(e.message.toString(), false))
+                }
             }
         }
     }
@@ -37,5 +49,10 @@ class RepositoriesListViewModel @Inject constructor(
         }
     }
 
+    fun logout(){
+        viewModelScope.launch(Dispatchers.Main) {
+            repository.exitSession()
+        }
+    }
 
 }

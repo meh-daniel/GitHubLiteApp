@@ -2,6 +2,7 @@ package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -30,6 +31,25 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
         initRecyclerView()
     }
 
+    override fun setupListeners() {
+        binding.logoutBtn.setOnClickListener {
+            viewModel.logout()
+        }
+        binding.emptyView.btnRefresh.root.setOnClickListener {
+            viewModel.loadRepositories()
+        }
+        binding.errorView.btnRefresh.root.setOnClickListener {
+            viewModel.loadRepositories()
+        }
+        binding.undefinedView.btnRefresh.root.setOnClickListener {
+            viewModel.loadRepositories()
+        }
+        binding.logoutBtn.setOnClickListener {
+            viewModel.logout()
+            findNavController().navigate(R.id.action_repositoriesListFragment_to_authFragment)
+        }
+    }
+
     override fun setupSubscribers() {
         observableViewModel()
     }
@@ -37,7 +57,14 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
     private fun observableViewModel() {
         viewModel.state.observe(this) { state ->
             with(binding){
+                errorView.btnRefresh.btnText.text = "REFRESH"
+                undefinedView.btnRefresh.btnText.text = "RETRY"
+                emptyView.btnRefresh.btnText.text = "RETRY"
                 if(state is RepositoriesListState.Loaded) repositoryAdapter.submitList(state.repos)
+                loadingView.root.visibility = if(state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
+                emptyView.root.visibility = if (state is RepositoriesListState.Empty) View.VISIBLE else View.GONE
+                errorView.root.visibility = if (state is RepositoriesListState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
+                undefinedView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
             }
         }
     }

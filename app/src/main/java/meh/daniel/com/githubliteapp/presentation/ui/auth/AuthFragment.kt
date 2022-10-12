@@ -1,5 +1,8 @@
 package meh.daniel.com.githubliteapp.presentation.ui.auth
 
+import android.app.AlertDialog
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -24,25 +27,30 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
 
     override fun setupListeners() {
         initButtonSignIn()
+        observeEditText()
     }
 
     override fun setupSubscribers() {
         setupSubscriberState()
         setupSubscriberAction()
-        setupSubscriberEditText()
     }
 
     private fun initButtonSignIn() {
-        binding.signInBtn.setOnClickListener {
-            viewModel.setToken(binding.tokenEdTxt.text.toString())
-            viewModel.onSignButtonPressed()
+        binding.buttonSignIn.setOnClickListener {
+            viewModel.onSignButtonPressed(binding.tokenEdTxt.text.toString())
         }
     }
 
-    private fun setupSubscriberEditText(){
-        viewModel.token.onEach { token ->
-            binding.tokenEdTxt.setText(token)
-        }.observeInLifecycle(viewLifecycleOwner)
+    private fun observeEditText() {
+        binding.tokenEdTxt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) = Unit
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                viewModel.onTextChanged()
+            }
+
+            override fun afterTextChanged(p0: Editable?) = Unit
+        })
     }
 
     private fun setupSubscriberAction() {
@@ -52,7 +60,14 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
                     findNavController().navigate(R.id.action_authFragment_to_repositoriesListFragment)
                 }
                 is AuthAction.ShowError -> {
-                    //TODO: тут нужно реализовать показ ошибки в самом editText
+                    context?.let {
+                        AlertDialog
+                            .Builder(it)
+                            .setTitle("Error")
+                            .setMessage(action.message)
+                            .setNegativeButton("Ok") { _, _ -> }
+                            .show()
+                    }
                 }
             }
         }.observeInLifecycle(viewLifecycleOwner)
@@ -61,11 +76,11 @@ class AuthFragment : BaseFragment<AuthViewModel, FragmentAuthBinding>(R.layout.f
     private fun setupSubscriberState(){
         viewModel.stateFlow.onEach { state ->
             with(binding){
-                signInBtn.text = if(state is AuthState.Loading) "" else getText(R.string.sign_in)
+                textSignIn.visibility = if(state is AuthState.Loading) View.INVISIBLE else View.VISIBLE
                 progressBarOfButton.visibility = if(state is AuthState.Loading) View.VISIBLE else View.INVISIBLE
-                signInBtn.visibility = if(state is AuthState.Loading) View.GONE else View.VISIBLE
-
+                textInputLayout.error = if(state is AuthState.InvalidInput) state.reason else ""
             }
         }.observeInLifecycle(viewLifecycleOwner)
     }
+
 }

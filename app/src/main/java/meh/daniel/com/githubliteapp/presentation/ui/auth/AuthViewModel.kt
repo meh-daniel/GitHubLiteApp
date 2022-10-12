@@ -5,10 +5,8 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -26,25 +24,34 @@ class AuthViewModel @Inject constructor(
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
     val stateFlow: Flow<AuthState> = _state.asStateFlow()
 
-    private val _token = MutableStateFlow("")
-    val token : StateFlow<String> = _token.asStateFlow()
-
-    fun onSignButtonPressed() {
+    fun onSignButtonPressed(token: String) {
         viewModelScope.launch(Dispatchers.IO){
-            setState(AuthState.Loading)
-            val repo = signRepository.signIn(token = _token.value)
-            if (!repo.successful){
-                sendAction(AuthAction.ShowError(repo.errorMessage!!))
-                setState(AuthState.Idle)
-            } else{
-                sendAction(AuthAction.RouteToMain)
+            if(!validateToken(token)){
+                setState(AuthState.InvalidInput("invalid token"))
+            } else {
+                setState(AuthState.Loading)
+                try {
+                    val tokenSuccessful = signRepository.signIn(token = token)
+                    if (tokenSuccessful.successful) {
+                        sendAction(AuthAction.RouteToMain)
+                    } else {
+                        setState(AuthState.InvalidInput("invalid token"))
+                    }
+                } catch (e: Throwable) {
+                    sendAction(AuthAction.ShowError(e.message.toString()))
+                }
             }
-            setState(AuthState.Idle)
         }
     }
 
-    fun setToken(token: String){
-        _token.value = token
+    private fun validateToken(token: String) : Boolean{
+        return token.isNotEmpty()
+    }
+
+    fun onTextChanged() {
+        viewModelScope.launch(Dispatchers.Main) {
+            if (_state.value is AuthState.InvalidInput) _state.value = AuthState.Idle
+        }
     }
 
     private fun setState(state: AuthState) {
