@@ -53,7 +53,7 @@
                     android:background="@color/status_bar"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/is_exit" />
+                    app:srcCompat="@drawable/ic_exit" />
             </LinearLayout>
         </com.google.android.material.appbar.MaterialToolbar>
     </com.google.android.material.appbar.AppBarLayout>

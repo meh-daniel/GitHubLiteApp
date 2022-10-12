@@ -29,8 +29,7 @@ class DetailRepositoryViewModel @Inject constructor(
                         githubRepo = repo,
                         readmeState = DetailRepositoryState.ReadmeState.Loading,
                     ))
-                    Log.d("xxx", "$repo")
-                        //loadReadme()
+                    loadReadme()
                 } catch (e: Exception) {
                     setState(DetailRepositoryState.Error(e.message.toString(), true))
                 }
@@ -45,25 +44,24 @@ class DetailRepositoryViewModel @Inject constructor(
     }
 
     private fun loadReadme() {
-        if (_state.value is DetailRepositoryState.Loaded &&
-            (_state.value as DetailRepositoryState.Loaded).readmeState is DetailRepositoryState.ReadmeState.Loading) {
+        if (_state.value is DetailRepositoryState.Loaded && (_state.value as DetailRepositoryState.Loaded).readmeState is DetailRepositoryState.ReadmeState.Loading) {
             viewModelScope.launch {
                 val content = _state.value as DetailRepositoryState.Loaded
-                try {
-                    val readme = repository.getRepositoryReadme(ownerName = "meh-daniel",
-                        repositoryName = content.githubRepo.name,
-                        branchName = content.githubRepo.branchName)
-                    _state.value = DetailRepositoryState.Loaded(
+                val readme = repository.getRepositoryReadme(ownerName = "meh-daniel",
+                    repositoryName = content.githubRepo.name,
+                    branchName = content.githubRepo.branchName)
+                if(readme.content.isEmpty()){
+                    setState(DetailRepositoryState.Loaded(
+                        githubRepo = content.githubRepo,
+                        readmeState = DetailRepositoryState.ReadmeState.Empty
+                    ))
+                }else {
+                    setState(DetailRepositoryState.Loaded(
                         githubRepo = content.githubRepo,
                         readmeState = DetailRepositoryState.ReadmeState.Loaded(
                             markdown = Base64Decoder.decode(readme.content)
-                        ),
-                    )
-                } catch (e: Exception) {
-                    DetailRepositoryState.Loaded(
-                        githubRepo = content.githubRepo,
-                        readmeState = DetailRepositoryState.ReadmeState.Error(e.message.toString(), false),
-                    )
+                        )
+                    ))
                 }
             }
         }

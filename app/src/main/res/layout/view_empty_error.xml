@@ -11,7 +11,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="242dp"
-        android:src="@drawable/is_empty_error" />
+        android:src="@drawable/ic_empty_error" />
 
     <TextView
         android:layout_width="match_parent"

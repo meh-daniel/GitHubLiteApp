@@ -14,7 +14,6 @@ interface DetailRepositoryState {
     sealed interface ReadmeState {
         object Loading : ReadmeState
         object Empty : ReadmeState
-        data class Error(val error: String, val isNoConnectionError: Boolean) : ReadmeState
         data class Loaded(val markdown: String) : ReadmeState
     }
 
