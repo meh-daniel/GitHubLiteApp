@@ -6,9 +6,9 @@ import meh.daniel.com.domain.utils.ValidationResult
 import meh.daniel.com.domain.model.Readme
 
 interface SessionRepository {
-    suspend fun getRepositories(): List<Repo>
-    suspend fun getRepository(id: Int): RepoDetails
-    suspend fun getRepositoryReadme(repositoryName: String, branchName: String): Readme
+    suspend fun getRepos(): List<Repo>
+    suspend fun getRepo(id: Int): RepoDetails
+    suspend fun getRepoReadme(repositoryName: String, branchName: String): Readme
     suspend fun signIn(token: String): ValidationResult
     suspend fun checkRegister(): ValidationResult
     suspend fun exitSession()

@@ -25,15 +25,21 @@ class SessionRepositoryImpl(
         context.getSharedPreferences(SESSION_PREFERENCES, Context.MODE_PRIVATE)
     }
 
-    override suspend fun getRepositories(): List<Repo> {
+    override suspend fun getRepos(): List<Repo> {
         return gitHubApi.getRepositories(getLogin().authToken!!).toDomain()
     }
 
-    override suspend fun getRepository(id: Int): RepoDetails {
+    override suspend fun getRepo(id: Int): RepoDetails {
         return gitHubApi.getRepositoryById(id).toDomain()
     }
 
-    override suspend fun getRepositoryReadme(repositoryName: String, branchName: String): Readme {
+    override suspend fun getRepoReadme(repositoryName: String, branchName: String): Readme {
+        Log.d("xxx123", getLogin().username.toString())
+        Log.d("xxx123", gitHubApi.getRepositoryReadme(
+            ownerName = getLogin().username.toString(),
+            repositoryName = repositoryName,
+            branchName = branchName
+        ).toDomain().content)
         return gitHubApi.getRepositoryReadme(
             ownerName = getLogin().username.toString(),
             repositoryName = repositoryName,
@@ -75,11 +81,7 @@ class SessionRepositoryImpl(
     }
 
     override suspend fun checkRegister(): ValidationResult {
-        return if(getLogin().authToken.isNullOrEmpty()){
-            ValidationResult(true)
-        } else{
-            ValidationResult(false)
-        }
+        return if(getLogin().authToken.isNullOrEmpty()) ValidationResult(true) else ValidationResult(false)
     }
 
     override suspend fun exitSession() {

@@ -44,7 +44,7 @@ class DetailRepositoryFragment : BaseFragment<DetailRepositoryViewModel, Fragmen
                 undefinedView.btnRefresh.btnText.text = "RETRY"
 
                 urlRepositoryTxt.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.url else ""
-                licence.text = if((state is DetailRepositoryState.Loaded) && state.githubRepo.licence != "null") state.githubRepo.licence else "nothing"
+                licence.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.licence else ""
                 countOfStars.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.stars.toString() else "0"
                 countOfForks.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.forks.toString() else "0"
                 countOfWatchers.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.watchers.toString() else "0"

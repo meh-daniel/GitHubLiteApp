@@ -23,19 +23,22 @@ class DetailRepositoryViewModel @Inject constructor(
     fun loadDetailRepository(idRepo: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             if (_state.value is DetailRepositoryState.Loading) {
-                val repo = repository.getRepository(idRepo)
+                val repo = repository.getRepo(idRepo)
                 try {
-                    val readme = repository.getRepositoryReadme(
+                    val readme = repository.getRepoReadme(
                         repositoryName = repo.name,
                         branchName = repo.branchName)
+
+                    Log.d("xxx123", readme.toString())
                     setState(DetailRepositoryState.Loaded(
                         githubRepo = repo,
                         readme = Base64Decoder.decode(readme.content)
                     ))
                 } catch (e: Exception) {
+                    Log.d("xxx123", e.message.toString())
                     setState(DetailRepositoryState.Loaded(
                         githubRepo = repo,
-                        readme = "No README.md"
+                        readme =  "No README.md"
                     ))
                 }
             }

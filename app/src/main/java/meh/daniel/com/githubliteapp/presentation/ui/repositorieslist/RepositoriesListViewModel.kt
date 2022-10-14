@@ -27,7 +27,7 @@ class RepositoriesListViewModel @Inject constructor(
         viewModelScope.launch(Dispatchers.IO) {
             setState(RepositoriesListState.Loading)
             try {
-                val repos = repository.getRepositories()
+                val repos = repository.getRepos()
                 if(repos.isEmpty()) {
                     setState(RepositoriesListState.Empty)
                 } else {
