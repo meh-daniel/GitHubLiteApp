@@ -22,7 +22,7 @@ internal fun List<RepositoryNW>.toDomain(): List<Repo> {
 
 internal fun UserInfoNW.toDomain() : UserInfo {
     return UserInfo(
-        name = name
+        name = login
     )
 }
 
@@ -38,6 +38,6 @@ internal fun RepoDetailsNW.toDomain(): RepoDetails {
         stars = stargazersCount,
         forks = forksCount,
         watchers = watchersCount,
-        licence = license.toString(),
+        licence = license?.name.toString(),
     )
 }

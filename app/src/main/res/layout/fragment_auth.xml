@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    android:orientation="vertical"
     tools:context=".presentation.ui.auth.AuthFragment">
 
     <androidx.appcompat.widget.AppCompatImageView
@@ -38,13 +37,12 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gitHubLogoImage">
-
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tokenEdTxt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="#64296E"
-            android:hint="Personal acces token"
+            android:backgroundTint="@color/github_logo"
+            android:hint="@string/personal_access_token"
             android:inputType="text"
             android:singleLine="true"
             android:textColor="@color/white"
@@ -55,9 +53,9 @@
         android:id="@+id/buttonSignIn"
         android:layout_width="match_parent"
         android:layout_height="35dp"
-        android:layout_marginBottom="17dp"
-        android:layout_marginEnd="16dp"
         android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="17dp"
         android:background="@drawable/button_with_progress_bg"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"

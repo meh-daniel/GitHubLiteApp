@@ -18,11 +18,7 @@ class SplashViewModel @Inject constructor(
     private val _splashAction = MutableLiveData<SplashAction>()
     val splashAction: LiveData<SplashAction> = _splashAction
 
-    init {
-        checkOfSign()
-    }
-
-    private fun checkOfSign() {
+    fun checkOfSign() {
         viewModelScope.launch(Dispatchers.IO) {
             if (repository.checkRegister().successful) setAction(SplashAction.RouteToAuth) else setAction(SplashAction.RouteToRepositoryList)
         }

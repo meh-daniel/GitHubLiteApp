@@ -8,7 +8,7 @@ import meh.daniel.com.domain.model.Readme
 interface SessionRepository {
     suspend fun getRepositories(): List<Repo>
     suspend fun getRepository(id: Int): RepoDetails
-    suspend fun getRepositoryReadme(ownerName: String, repositoryName: String, branchName: String): Readme
+    suspend fun getRepositoryReadme(repositoryName: String, branchName: String): Readme
     suspend fun signIn(token: String): ValidationResult
     suspend fun checkRegister(): ValidationResult
     suspend fun exitSession()

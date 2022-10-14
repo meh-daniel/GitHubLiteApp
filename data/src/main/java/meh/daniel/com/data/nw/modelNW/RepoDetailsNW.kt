@@ -37,7 +37,7 @@ data class RepoDetailsNW(
     @SerializedName("deployments_url")
     val deploymentsUrl: String,
     @SerializedName("description")
-    val description: Any?,
+    val description: String,
     @SerializedName("disabled")
     val disabled: Boolean,
     @SerializedName("downloads_url")
@@ -73,7 +73,7 @@ data class RepoDetailsNW(
     @SerializedName("has_wiki")
     val hasWiki: Boolean,
     @SerializedName("homepage")
-    val homepage: Any?,
+    val homepage: String,
     @SerializedName("hooks_url")
     val hooksUrl: String,
     @SerializedName("html_url")
@@ -97,7 +97,7 @@ data class RepoDetailsNW(
     @SerializedName("languages_url")
     val languagesUrl: String,
     @SerializedName("license")
-    val license: Any?,
+    val license: License?,
     @SerializedName("merges_url")
     val mergesUrl: String,
     @SerializedName("milestones_url")
@@ -151,7 +151,7 @@ data class RepoDetailsNW(
     @SerializedName("temp_clone_token")
     val tempCloneToken: Any?,
     @SerializedName("topics")
-    val topics: List<Any>,
+    val topics: List<String>,
     @SerializedName("trees_url")
     val treesUrl: String,
     @SerializedName("updated_at")
@@ -167,6 +167,19 @@ data class RepoDetailsNW(
     @SerializedName("web_commit_signoff_required")
     val webCommitSignoffRequired: Boolean
 ) {
+    data class License(
+        @SerializedName("key")
+        val key: String,
+        @SerializedName("name")
+        val name: String,
+        @SerializedName("node_id")
+        val nodeId: String,
+        @SerializedName("spdx_id")
+        val spdxId: String,
+        @SerializedName("url")
+        val url: String
+    )
+
     data class Owner(
         @SerializedName("avatar_url")
         val avatarUrl: String,

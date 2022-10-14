@@ -13,8 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="21dp"
-        android:textColor="#58A6FF"
         android:fontFamily="@font/roboto_medium"
+        android:textColor="#58A6FF"
         android:textSize="16sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -24,29 +24,30 @@
         android:id="@+id/programmingLanguageTxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="21dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/roboto_medium"
+        android:textColor="@color/white"
         android:textSize="12sp"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/nameRepositoryTxt"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:text="kotlin"
-        style="@style/itemNameLanguageTxt"/>
+        app:layout_constraintTop_toTopOf="@+id/nameRepositoryTxt"
+        tools:text="kotlin" />
 
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/repositoryDescription"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
         android:layout_marginBottom="16dp"
+        android:ellipsize="end"
+        android:maxLines="3"
+        android:textColor="@color/white"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/programmingLanguageTxt"
+        app:layout_constraintStart_toStartOf="@+id/nameRepositoryTxt"
         app:layout_constraintTop_toBottomOf="@+id/nameRepositoryTxt"
         tools:text="eeeeeeeehhhhhhhoooooooooooyyyyyyyyyyyyyyy"
-        tools:visibility="visible"
-        style="@style/itemRepositoryDescriptionTxt"/>
+        tools:visibility="visible" />
 
     <View
         android:layout_width="match_parent"

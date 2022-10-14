@@ -1,15 +1,14 @@
 package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import java.net.ConnectException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import meh.daniel.com.domain.SessionRepository
-import meh.daniel.com.domain.model.Repo
 import meh.daniel.com.githubliteapp.presentation.base.BaseViewModel
 
 @HiltViewModel
@@ -17,8 +16,8 @@ class RepositoriesListViewModel @Inject constructor(
     private val repository: SessionRepository
 ) : BaseViewModel() {
 
-    private val _state = MutableLiveData<RepositoriesListState>(RepositoriesListState.Loading)
-    var state: LiveData<RepositoriesListState> = _state
+    private val _state = MutableStateFlow<RepositoriesListState>(RepositoriesListState.Loading)
+    var state = _state.asStateFlow()
 
     init {
         loadRepositories()

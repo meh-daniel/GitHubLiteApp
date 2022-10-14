@@ -19,6 +19,15 @@ class SplashFragment: BaseFragment<SplashViewModel, FragmentSplashBinding>(R.lay
         container: ViewGroup?
     ) = FragmentSplashBinding.inflate(inflater, container, false)
 
+    override fun initialize() {
+        with(binding.icCompany) {
+            alpha = 0f
+            animate().setDuration(500).alpha(1f).withEndAction {
+                viewModel.checkOfSign()
+            }
+        }
+    }
+
     override fun setupSubscribers() {
         observe()
     }

@@ -19,10 +19,10 @@ class AuthViewModel @Inject constructor(
 ) : BaseViewModel(){
 
     private val _action: Channel<AuthAction> = Channel(Channel.BUFFERED)
-    var actionFlow: Flow<AuthAction> = _action.receiveAsFlow()
+    var actionFlow = _action.receiveAsFlow()
 
     private val _state = MutableStateFlow<AuthState>(AuthState.Idle)
-    val stateFlow: Flow<AuthState> = _state.asStateFlow()
+    val stateFlow= _state.asStateFlow()
 
     fun onSignButtonPressed(token: String) {
         viewModelScope.launch(Dispatchers.IO){

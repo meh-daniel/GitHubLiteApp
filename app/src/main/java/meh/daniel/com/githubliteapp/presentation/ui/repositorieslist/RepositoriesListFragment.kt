@@ -8,9 +8,11 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.onEach
 import meh.daniel.com.githubliteapp.R
 import meh.daniel.com.githubliteapp.databinding.FragmentRepositorieslistBinding
 import meh.daniel.com.githubliteapp.presentation.base.BaseFragment
+import meh.daniel.com.githubliteapp.presentation.utils.observeInLifecycle
 
 private const val ID_REPO = "id_repo"
 
@@ -29,6 +31,7 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
 
     override fun initialize() {
         initRecyclerView()
+        initView()
     }
 
     override fun setupListeners() {
@@ -51,21 +54,23 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
     }
 
     override fun setupSubscribers() {
-        observableViewModel()
-    }
-
-    private fun observableViewModel() {
-        viewModel.state.observe(this) { state ->
+        viewModel.state.onEach { state ->
             with(binding){
-                errorView.btnRefresh.btnText.text = "REFRESH"
-                undefinedView.btnRefresh.btnText.text = "RETRY"
-                emptyView.btnRefresh.btnText.text = "RETRY"
+
                 if(state is RepositoriesListState.Loaded) repositoryAdapter.submitList(state.repos)
                 loadingView.root.visibility = if(state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
                 emptyView.root.visibility = if (state is RepositoriesListState.Empty) View.VISIBLE else View.GONE
                 errorView.root.visibility = if (state is RepositoriesListState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
                 undefinedView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
             }
+        }.observeInLifecycle(this)
+    }
+
+    private fun initView() {
+        with(binding) {
+            errorView.btnRefresh.btnText.text = "REFRESH"
+            undefinedView.btnRefresh.btnText.text = "RETRY"
+            emptyView.btnRefresh.btnText.text = "RETRY"
         }
     }
 
