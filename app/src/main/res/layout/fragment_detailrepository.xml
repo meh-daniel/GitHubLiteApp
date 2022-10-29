@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg"
-    tools:context=".presentation.ui.repositoryinfo.DetailRepositoryFragment">
+    tools:context=".presentation.screens.repositoryinfo.DetailRepositoryFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_container"
@@ -244,6 +244,7 @@
                 android:layout_height="wrap_content"
                 android:paddingTop="26dp"
                 android:textColor="@color/white"
+                android:layout_marginBottom="16dp"
                 tools:lines="10"
                 tools:text="@tools:sample/lorem/random" />
         </androidx.appcompat.widget.LinearLayoutCompat>

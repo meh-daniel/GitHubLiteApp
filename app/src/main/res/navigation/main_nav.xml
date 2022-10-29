@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/authFragment"
-        android:name="meh.daniel.com.githubliteapp.presentation.ui.auth.AuthFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.screens.auth.AuthFragment"
         android:label="auth_fragment"
         tools:layout="@layout/fragment_auth" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/repositoriesListFragment"
-        android:name="meh.daniel.com.githubliteapp.presentation.ui.repositorieslist.RepositoriesListFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.screens.repositorieslist.RepositoriesListFragment"
         android:label="repositorieslist_fragment"
         tools:layout="@layout/fragment_repositorieslist" >
         <action
@@ -28,7 +28,7 @@
     </fragment>
     <fragment
         android:id="@+id/splashFragment"
-        android:name="meh.daniel.com.githubliteapp.presentation.ui.splash.SplashFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.screens.splash.SplashFragment"
         android:label="SplashFragment" >
         <action
             android:id="@+id/action_splashFragment_to_authFragment"
@@ -39,7 +39,7 @@
     </fragment>
     <fragment
         android:id="@+id/detailInfoFragment"
-        android:name="meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo.DetailRepositoryFragment"
+        android:name="meh.daniel.com.githubliteapp.presentation.screens.repositoryinfo.DetailRepositoryFragment"
         android:label="fragment_repositoryinfo"
         tools:layout="@layout/fragment_detailrepository" >
         <argument
@@ -48,5 +48,8 @@
         <action
             android:id="@+id/action_detailInfoFragment_to_authFragment"
             app:destination="@id/authFragment" />
+        <action
+            android:id="@+id/action_detailInfoFragment_to_repositoriesListFragment"
+            app:popUpTo="@id/repositoriesListFragment" />
     </fragment>
 </navigation>

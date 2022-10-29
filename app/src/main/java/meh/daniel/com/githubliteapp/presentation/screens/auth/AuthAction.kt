@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.auth
+package meh.daniel.com.githubliteapp.presentation.screens.auth
 
 sealed interface AuthAction {
     data class ShowError(val message: String) : AuthAction

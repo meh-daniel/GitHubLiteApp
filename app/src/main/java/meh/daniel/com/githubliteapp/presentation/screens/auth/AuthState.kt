@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.auth
+package meh.daniel.com.githubliteapp.presentation.screens.auth
 
 sealed interface AuthState {
     object Idle : AuthState

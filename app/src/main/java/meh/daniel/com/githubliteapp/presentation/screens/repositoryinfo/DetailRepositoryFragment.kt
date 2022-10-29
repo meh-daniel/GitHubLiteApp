@@ -1,10 +1,11 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
+package meh.daniel.com.githubliteapp.presentation.screens.repositoryinfo
 
 import android.text.Spanned
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import io.noties.markwon.Markwon
 import kotlinx.coroutines.flow.onEach
@@ -30,18 +31,26 @@ class DetailRepositoryFragment : BaseFragment<DetailRepositoryViewModel, Fragmen
         arguments?.getString(ID_REPO)?.let {
             viewModel.loadDetailRepository(it.toInt())
         }
+        initView()
+    }
+
+    override fun setupListeners() {
+        binding.logoutBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_detailInfoFragment_to_authFragment)
+        }
+        binding.ivBack.setOnClickListener {
+            findNavController().navigate(R.id.action_detailInfoFragment_to_repositoriesListFragment)
+        }
     }
 
     override fun setupSubscribers() {
         viewModel.state.onEach { state ->
             with(binding){
                 content.visibility = if(state is DetailRepositoryState.Loaded) View.VISIBLE else View.GONE
-                loadingView.root.visibility = if(state is DetailRepositoryState.Loading) View.VISIBLE else View.GONE
 
-                errorView.root.visibility = if (state is DetailRepositoryState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
-                errorView.btnRefresh.btnText.text = "REFRESH"
+                loadingView.root.visibility = if(state is DetailRepositoryState.Loading) View.VISIBLE else View.GONE
+                errorView.root.visibility = if (state is DetailRepositoryState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
                 undefinedView.root.visibility = if (state is DetailRepositoryState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
-                undefinedView.btnRefresh.btnText.text = "RETRY"
 
                 urlRepositoryTxt.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.url else ""
                 licence.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.licence else ""
@@ -50,7 +59,6 @@ class DetailRepositoryFragment : BaseFragment<DetailRepositoryViewModel, Fragmen
                 countOfWatchers.text = if(state is DetailRepositoryState.Loaded) state.githubRepo.watchers.toString() else "0"
 
                 scrollContentReadMe.visibility = if(state is DetailRepositoryState.Loaded) View.VISIBLE else View.GONE
-
                 if(state is DetailRepositoryState.Loaded) {
                     val markwon = Markwon.create(requireContext().applicationContext)
                     val node: Node = markwon.parse(state.readme)
@@ -59,5 +67,11 @@ class DetailRepositoryFragment : BaseFragment<DetailRepositoryViewModel, Fragmen
                 }
             }
         }.observeInLifecycle(viewLifecycleOwner)
+    }
+    private fun initView() {
+        with(binding) {
+            errorView.btnRefresh.btnText.text = getString(R.string.refresh)
+            undefinedView.btnRefresh.btnText.text = getString(R.string.retry)
+        }
     }
 }

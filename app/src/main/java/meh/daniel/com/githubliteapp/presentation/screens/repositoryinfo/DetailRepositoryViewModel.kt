@@ -1,8 +1,8 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
+package meh.daniel.com.githubliteapp.presentation.screens.repositoryinfo
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import java.net.ConnectException
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -23,23 +23,21 @@ class DetailRepositoryViewModel @Inject constructor(
     fun loadDetailRepository(idRepo: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             if (_state.value is DetailRepositoryState.Loading) {
-                val repo = repository.getRepo(idRepo)
                 try {
+                    val repo = repository.getRepo(idRepo)
                     val readme = repository.getRepoReadme(
                         repositoryName = repo.name,
-                        branchName = repo.branchName)
-
-                    Log.d("xxx123", readme.toString())
+                        branchName = repo.branchName
+                    )
                     setState(DetailRepositoryState.Loaded(
                         githubRepo = repo,
-                        readme = Base64Decoder.decode(readme.content)
+                        readme = if(readme.content == "") "No README.md" else Base64Decoder.decode(readme.content)
                     ))
-                } catch (e: Exception) {
-                    Log.d("xxx123", e.message.toString())
-                    setState(DetailRepositoryState.Loaded(
-                        githubRepo = repo,
-                        readme =  "No README.md"
-                    ))
+                } catch (e: Throwable) {
+                    when (e) {
+                        is ConnectException -> setState(DetailRepositoryState.Error(e.message.toString(), true))
+                        else -> setState(DetailRepositoryState.Error(e.message.toString(), false))
+                    }
                 }
             }
         }

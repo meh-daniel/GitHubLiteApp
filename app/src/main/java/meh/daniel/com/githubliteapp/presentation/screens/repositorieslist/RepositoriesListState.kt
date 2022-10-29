@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.screens.repositorieslist
 
 import meh.daniel.com.domain.model.Repo
 

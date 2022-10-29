@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.screens.repositorieslist
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -20,9 +20,8 @@ private const val ID_REPO = "id_repo"
 class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, FragmentRepositorieslistBinding>(R.layout.fragment_repositorieslist){
 
     override val viewModel: RepositoriesListViewModel by viewModels()
-    private val repositoryAdapter = RepositoryAdapter(
-        onClickRepo = { routeToDetails(it) }
-    )
+
+    private val repositoryAdapter = RepositoryAdapter(onClickRepo ={ routeToDetails(it) })
 
     override fun initBinding(
         inflater: LayoutInflater,
@@ -56,21 +55,20 @@ class RepositoriesListFragment : BaseFragment<RepositoriesListViewModel, Fragmen
     override fun setupSubscribers() {
         viewModel.state.onEach { state ->
             with(binding){
-
                 if(state is RepositoriesListState.Loaded) repositoryAdapter.submitList(state.repos)
                 loadingView.root.visibility = if(state is RepositoriesListState.Loading) View.VISIBLE else View.GONE
                 emptyView.root.visibility = if (state is RepositoriesListState.Empty) View.VISIBLE else View.GONE
-                errorView.root.visibility = if (state is RepositoriesListState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
-                undefinedView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
+                errorView.root.visibility = if (state is RepositoriesListState.Error && !state.isNoConnectionError) View.VISIBLE else View.GONE
+                undefinedView.root.visibility = if (state is RepositoriesListState.Error && state.isNoConnectionError) View.VISIBLE else View.GONE
             }
         }.observeInLifecycle(this)
     }
 
     private fun initView() {
         with(binding) {
-            errorView.btnRefresh.btnText.text = "REFRESH"
-            undefinedView.btnRefresh.btnText.text = "RETRY"
-            emptyView.btnRefresh.btnText.text = "RETRY"
+            errorView.btnRefresh.btnText.text = getString(R.string.refresh)
+            undefinedView.btnRefresh.btnText.text = getString(R.string.retry)
+            emptyView.btnRefresh.btnText.text = getString(R.string.retry)
         }
     }
 

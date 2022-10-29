@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.screens.repositorieslist
 
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +35,7 @@ class RepositoriesListViewModel @Inject constructor(
                 }
             } catch (e: Throwable) {
                 when (e) {
-                    is ConnectException -> setState(RepositoriesListState.Error(e.message.toString(), false))
+                    is ConnectException -> setState(RepositoriesListState.Error(e.message.toString(), true))
                     else -> setState(RepositoriesListState.Error(e.message.toString(), false))
                 }
             }

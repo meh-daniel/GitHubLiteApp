@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.splash
+package meh.daniel.com.githubliteapp.presentation.screens.splash
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -22,7 +22,7 @@ class SplashFragment: BaseFragment<SplashViewModel, FragmentSplashBinding>(R.lay
     override fun initialize() {
         with(binding.icCompany) {
             alpha = 0f
-            animate().setDuration(500).alpha(1f).withEndAction {
+            animate().setDuration(1500).alpha(1f).withEndAction {
                 viewModel.checkOfSign()
             }
         }

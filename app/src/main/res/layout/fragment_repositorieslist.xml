@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    tools:context=".presentation.ui.repositorieslist.RepositoriesListFragment">
+    tools:context=".presentation.screens.repositorieslist.RepositoriesListFragment">
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/toolbar_container"

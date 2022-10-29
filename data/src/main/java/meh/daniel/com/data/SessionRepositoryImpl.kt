@@ -1,7 +1,6 @@
 package meh.daniel.com.data
 
 import android.content.Context
-import android.util.Log
 import meh.daniel.com.data.nw.GitHubApi
 import meh.daniel.com.domain.SessionRepository
 import meh.daniel.com.domain.model.AuthorizedUser
@@ -34,17 +33,15 @@ class SessionRepositoryImpl(
     }
 
     override suspend fun getRepoReadme(repositoryName: String, branchName: String): Readme {
-        Log.d("xxx123", getLogin().username.toString())
-        Log.d("xxx123", gitHubApi.getRepositoryReadme(
-            ownerName = getLogin().username.toString(),
-            repositoryName = repositoryName,
-            branchName = branchName
-        ).toDomain().content)
-        return gitHubApi.getRepositoryReadme(
-            ownerName = getLogin().username.toString(),
-            repositoryName = repositoryName,
-            branchName = branchName
-        ).toDomain()
+        return try {
+            gitHubApi.getRepositoryReadme(
+                ownerName = getLogin().username.toString(),
+                repositoryName = repositoryName,
+                branchName = branchName
+            ).toDomain()
+        } catch (e: Throwable) {
+            Readme("")
+        }
     }
     override suspend fun signIn(token: String): ValidationResult {
         return try {
@@ -61,7 +58,6 @@ class SessionRepositoryImpl(
                         username = gitHubApi.getUserByToken("Token $token").toDomain().name
                     )
                 )
-                Log.d("xxx123", gitHubApi.getUserByToken("Token $token").toString())
                 ValidationResult(
                     successful = true
                 )

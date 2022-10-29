@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.splash
+package meh.daniel.com.githubliteapp.presentation.screens.splash
 
 sealed interface SplashAction{
     object RouteToAuth: SplashAction

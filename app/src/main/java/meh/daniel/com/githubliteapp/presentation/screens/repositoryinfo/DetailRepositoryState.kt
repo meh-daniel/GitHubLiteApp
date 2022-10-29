@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositoryinfo
+package meh.daniel.com.githubliteapp.presentation.screens.repositoryinfo
 
 import meh.daniel.com.domain.model.RepoDetails
 

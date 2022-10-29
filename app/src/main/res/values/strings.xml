@@ -5,4 +5,6 @@
     <string name="licence">Licence</string>
     <string name="personal_access_token">Personal access token</string>
     <string name="repositories">Repositories</string>
+    <string name="refresh">REFRESH</string>
+    <string name="retry">RETRY</string>
 </resources>

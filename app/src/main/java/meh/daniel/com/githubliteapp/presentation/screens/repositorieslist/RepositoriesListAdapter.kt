@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.repositorieslist
+package meh.daniel.com.githubliteapp.presentation.screens.repositorieslist
 
 import android.view.LayoutInflater
 import android.view.View

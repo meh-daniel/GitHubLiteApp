@@ -1,4 +1,4 @@
-package meh.daniel.com.githubliteapp.presentation.ui.splash
+package meh.daniel.com.githubliteapp.presentation.screens.splash
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
