@@ -32,7 +32,6 @@ abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(
         super.onViewCreated(view, savedInstanceState)
         initialize()
         setupListeners()
-        setupRequests()
         setupSubscribers()
     }
 
@@ -40,9 +39,6 @@ abstract class BaseFragment<ViewModel: BaseViewModel, Binding : ViewBinding>(
     }
 
     protected open fun setupListeners() {
-    }
-
-    protected open fun setupRequests() {
     }
 
     protected open fun setupSubscribers() {
