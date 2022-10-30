@@ -20,7 +20,7 @@ https://api.github.com/
         * ViewStates
         * ViewActions
 * Domain
-    * SerialRepository
+    * Repository
     * Utils
     * Model
 * Data
