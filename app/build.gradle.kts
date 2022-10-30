@@ -1,26 +1,17 @@
 plugins {
-    id("com.android.application")
-    id("dagger.hilt.android.plugin")
-    kotlin("android")
-    kotlin("kapt")
+    id(Plugins.AGP.APPLICATION)
+    id(Plugins.HILT)
+    kotlin(Plugins.Kotlin.ANDROID)
+    kotlin(Plugins.Kotlin.KAPT)
 }
-
-repositories {
-    google()
-    mavenCentral()
-}
-
-
 android {
     compileSdk = Config.compileSdk
-
     defaultConfig {
         applicationId = Config.packageName
         minSdk =  Config.minSDK
         targetSdk = Config.targetSDK
-        versionCode = Config.versionCode
-
-        versionName = Config.versionName
+        versionCode = 1
+        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -35,17 +26,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = Config.Options.compileOptions
+        targetCompatibility = Config.Options.compileOptions
     }
     kotlinOptions {
-        jvmTarget = "11"
-
-        // без данного параметра viewModel не инициализировалась с помощью фабрики
-        freeCompilerArgs = listOf("-Xjvm-default=compatibility")
-    }
-    buildFeatures {
-        viewBinding = true
+        jvmTarget = Config.Options.kotlinOptions
     }
     kapt {
         arguments {
@@ -54,58 +39,40 @@ android {
             arg("room.expandProjection", "true")
         }
     }
-    packagingOptions {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+    buildFeatures.viewBinding = true
 }
-
 dependencies {
-    // Hilt
-    implementation(Dependencies.Hilt.android)
-    kapt(Dependencies.Hilt.compiler)
-
-    // Lifecycle
-    implementation(Dependencies.Lifecycle.viewmodel)
-    implementation(Dependencies.Lifecycle.livedata)
-
-    // Navigation
-    implementation(Dependencies.Navigation.fragment)
-    implementation(Dependencies.Navigation.ui)
-
-    // Room
-    implementation(Dependencies.Room.ktx)
-    implementation(Dependencies.Room.runtime)
-    implementation(Dependencies.Room.paging)
-    kapt(Dependencies.Room.compiler)
-
-    // GeoLocation
-    implementation(Dependencies.Geo.playServices)
-
-    // Coroutines
-    implementation(Dependencies.Coroutines.core)
-    implementation(Dependencies.Coroutines.android)
-
-    // Network
-    implementation(Dependencies.Network.retrofit2)
-    implementation(Dependencies.Network.retrofit2Gson)
-    implementation(Dependencies.Network.logging)
-
-    // UI
-    implementation(Dependencies.UI.constraintLayout)
-    implementation(Dependencies.UI.recyclerView)
-    implementation(Dependencies.UI.fragmentKtx)
-    implementation(Dependencies.UI.activityKtx)
-
-    // Android
-    implementation(Dependencies.Android.coreKtx)
-    implementation(Dependencies.Android.appCompat)
-    implementation(Dependencies.Android.appCompatResources)
-    implementation(Dependencies.Android.material)
-
-    // Test
-    testImplementation(Dependencies.Test.jUnit)
-    androidTestImplementation(Dependencies.Test.androidJUnit)
-    androidTestImplementation(Dependencies.Test.espresso)
+    implementation(project(Modules.Features.DATA))
+    implementation(project(Modules.Features.DOMAIN))
+    implementation(Deps.Network.RETROFIT2)
+    implementation(Deps.Network.RETROFIT2_GSON)
+    implementation(Deps.Network.LOGGING_INERCEPTOR)
+    implementation(Deps.Network.MARKWON)
+    implementation(Deps.Hilt.ANDROID)
+    implementation(Deps.Room.KTX)
+    implementation(Deps.Room.RUNTIME)
+    kapt(Deps.Room.COMPILER)
+    kapt(Deps.Hilt.COMPILER)
+    implementation(Deps.Lifecycle.VIEW_MODEL)
+    implementation(Deps.Lifecycle.LIVE_DATA)
+    implementation(Deps.Lifecycle.RUNTIME)
+    implementation(Deps.Navigation.FRAGMENT)
+    implementation(Deps.Navigation.UI)
+    implementation(Deps.Coroutines.CORE)
+    implementation(Deps.Coroutines.ANDROID)
+    implementation(Deps.UI.CONSTRAINT_LAYOUT)
+    implementation(Deps.UI.RECYCLER_VIEW)
+    implementation(Deps.UI.PROGRESS_BAR)
+    implementation(Deps.UI.FRAGMENT_KTX)
+    implementation(Deps.UI.ACTIVITY_KTX)
+    implementation(Deps.ImageLoad.GLIDE)
+    implementation(Deps.ImageLoad.GLIDE_COMPILER)
+    implementation(Deps.Android.CORE_KTX)
+    implementation(Deps.Android.APPCOMPAT)
+    implementation(Deps.Android.MATERIAL)
+    testImplementation(Deps.Test.JUNIT)
+    androidTestImplementation(Deps.Test.ANDROID_JUNIT)
+    androidTestImplementation(Deps.Test.ESPRESSO)
+    androidTestImplementation(Deps.Test.MOCKITO_CORE)
+    androidTestImplementation(Deps.Test.MOCKITO_KOTLIN)
 }

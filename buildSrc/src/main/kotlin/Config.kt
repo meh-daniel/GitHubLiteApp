@@ -1,10 +1,18 @@
+import org.gradle.api.JavaVersion
+
 object Config {
+
     const val compileSdk = 32
     const val minSDK = 22
-    const val targetSDK = 32
+    const val targetSDK = 31
 
-    const val versionCode = 1
-    const val versionName = "1.0"
-
+    const val release = "release"
+    const val debug = "debug"
     const val packageName = "meh.daniel.com.githubliteapp"
+
+    object Options {
+        val compileOptions = JavaVersion.VERSION_11
+        const val kotlinOptions = "11"
+    }
+
 }
