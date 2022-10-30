@@ -12,4 +12,5 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="206dp"
         android:src="@drawable/ic_github_logo" />
+
 </RelativeLayout>

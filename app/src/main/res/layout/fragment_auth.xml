@@ -37,6 +37,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/gitHubLogoImage">
+
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/tokenEdTxt"
             android:layout_width="match_parent"
@@ -47,6 +48,7 @@
             android:singleLine="true"
             android:textColor="@color/white"
             android:textColorHint="#80FFFFFF" />
+
     </com.google.android.material.textfield.TextInputLayout>
 
     <RelativeLayout
@@ -60,6 +62,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <ProgressBar
             android:id="@+id/progressBarOfButton"
             android:layout_width="24dp"
@@ -69,6 +72,7 @@
             android:indeterminate="true"
             android:visibility="gone"
             android:indeterminateTint="@color/white"/>
+
         <TextView
             android:id="@+id/textSignIn"
             android:layout_width="wrap_content"
@@ -77,6 +81,6 @@
             android:text="@string/sign_in"
             android:background="@color/accent"
             android:textColor="@color/white" />
-    </RelativeLayout>
 
+    </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

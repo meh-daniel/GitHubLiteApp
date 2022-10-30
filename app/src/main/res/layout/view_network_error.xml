@@ -36,5 +36,6 @@
     <include
         android:id="@+id/btn_refresh"
         layout="@layout/view_button" />
+
 </LinearLayout>
 
