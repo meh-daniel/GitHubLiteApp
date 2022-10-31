@@ -40,6 +40,7 @@ https://api.github.com/
 |<img width="1604"  src="https://github.com/meh-daniel/GitHubLiteApp/blob/dev/github-readme-photo/GithubLiteAppPhoto1.jpg"> |  <img width="1604" src="https://github.com/meh-daniel/GitHubLiteApp/blob/dev/github-readme-photo/GithubLiteAppPhoto2.jpg">|<img width="1604" src="https://github.com/meh-daniel/GitHubLiteApp/blob/dev/github-readme-photo/GithubLiteAppPhoto3.jpg">|
 
 ### Use case:
++ Splash screen
 + Authentication screen by token
 + Processing the injected token
 + Moving to the repositories screen
